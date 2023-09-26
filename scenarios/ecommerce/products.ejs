@@ -1,0 +1,57 @@
+<%- include(commonPath + '/header.ejs') %>
+
+<div class="container mx-auto py-8 relative">
+    <a href="./cart" id="cart-icon" class="text-blue-600 text-xl hover:underline absolute top-8 right-8">🛒 Cart (0)</a>
+    <h1 class="text-3xl font-bold mb-4 text-center">Products</h1>
+    <div id="error-message" class="text-center text-red-600 mb-4"></div>
+    <ul class="space-y-4">
+		<% [1,2,3].forEach(productNumber => { %>
+			<li class="text-center">
+				<span>Product <%= productNumber %></span>
+				<button onclick="addToCart('<%= productNumber %>')" class="ml-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300">Add to cart</button>
+			</li>
+		<% }) %>
+    </ul>
+</div>
+<script>
+	let firstRun = true;
+	function addToCart(productId) {
+		fetch(`./add-to-cart?productId=${productId}`)
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Failed to add product to cart');
+					}
+					return response.json();
+				})
+				.then(() => updateCartIcon())
+				.catch(error => console.error('Error:', error));
+	}
+
+	function updateCartIcon() {
+		fetch('./cart-data')
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Failed to fetch cart data');
+					}
+					return response.json();
+				})
+				.then(data => {
+					const cartIconText = `🛒 Cart (${data.length})`;
+					document.getElementById('cart-icon').textContent = cartIconText;
+
+					if (data.length === 0 && !firstRun) {
+						document.getElementById('error-message').textContent = 'Unable to add to cart';
+					} else {
+						document.getElementById('error-message').textContent = '';
+					}
+					firstRun = false;
+				})
+				.catch(error => console.error('Error:', error));
+	}
+
+	document.addEventListener('DOMContentLoaded', () => {
+		updateCartIcon();
+	});
+</script>
+
+<%- include(commonPath + '/footer.ejs') %>
