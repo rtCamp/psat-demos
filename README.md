@@ -26,7 +26,7 @@ Before you can run the Privacy Sandbox Demos, make sure you have the following s
 1. Clone this repository to your local machine:
 
     ```bash
-    git clone <https://github.com/yourusername/privacy-sandbox-demos.git>
+    git clone <https://github.com/privacysandbox/privacy-sandbox-demos.git>
     ```
 
 2.
