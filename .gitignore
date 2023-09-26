@@ -1,0 +1,11 @@
+# Node dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.test
+.env.production
+
+# IDE files
+.idea
+.vscode
