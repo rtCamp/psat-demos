@@ -9,7 +9,7 @@ technologies and scenarios through various demos and use cases.
 
 The project is structured into two main sections:
 
-1. **Demo Types**: These are categorized demos, each showcasing a specific privacy technology.
+1. **Demo Types**: These are categorized demos, each showcasing a specific privacy sandbox technology.
 2. **Scenarios**: These demos represent real-world scenarios where privacy technologies can be applied.
 
 ## Getting Started
@@ -26,7 +26,7 @@ Before you can run the Privacy Sandbox Demos, make sure you have the following s
 1. Clone this repository to your local machine:
 
     ```bash
-    git clone <https://github.com/privacysandbox/privacy-sandbox-demos.git>
+    git clone https://github.com/rtCamp/privacy-sandbox-demos.git
     ```
 
 2.
