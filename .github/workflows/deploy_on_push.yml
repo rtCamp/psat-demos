@@ -7,8 +7,8 @@ name: Deploy
 jobs:
   deploy:
     name: Deploy
-    runs-on: self-hosted
-    # runs-on: ubuntu-latest
+    # runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Deploy
