@@ -1,0 +1,19 @@
+on:
+  push:
+    branches:
+      - main
+
+name: Deploy
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: self-hosted
+    # runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy
+        id: deploy
+        uses: rtCamp/action-deploy-frappe@main
+        #uses: docker://ghcr.io/rtcamp/action-deploy-frappe:dev
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
