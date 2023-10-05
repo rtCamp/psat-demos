@@ -91,28 +91,28 @@ domain also utilizing the third-party service, and the third-party analytics ser
 
 ```mermaid
 sequenceDiagram
-    participant Visitor
+    participant User
     participant DomainA
     participant DomainB
     participant DomainC
     
-    Note over Visitor,DomainC: Current Behaviour
+    Note over User,DomainC: Current Behaviour
     
-    Visitor->>DomainA: Visits
+    User->>DomainA: Visits
     DomainA->>DomainC: Requests tracking script from Domain C
-    DomainC->>Visitor: Stores unique ID in cookie
-    Visitor->>DomainB: Visits
+    DomainC->>User: Stores unique ID in cookie
+    User->>DomainB: Visits
     DomainB->>DomainC: Retrieves unique ID from cookie
-    DomainC->>Visitor: Recognizes as the same visitor
+    DomainC->>User: Recognizes as the same User
 
-    Note over Visitor,DomainC: After Third-party Cookie Deprecation
+    Note over User,DomainC: After Third-party Cookie Deprecation
     
-    Visitor->>DomainA: Visits
+    User->>DomainA: Visits
     DomainA->>DomainC: Unable to assign unique ID
-    DomainC-->>Visitor: Cannot store ID (no cookie)
-    Visitor->>DomainB: Visits
+    DomainC-->>User: Cannot store ID (no cookie)
+    User->>DomainB: Visits
     DomainB->>DomainC: Cannot retrieve unique ID
-    DomainC-->>Visitor: Treats as a new visitor
+    DomainC-->>User: Treats as a new User
 ```
 
 ### **E-Commerce - Cross-Domain Shopping Cart**
@@ -131,25 +131,41 @@ still use third-party cookies to manage cart information across different domain
 
 ```mermaid
 sequenceDiagram
-    participant Visitor
+    participant User
     participant DomainA
     participant DomainB
     participant DomainC
 
-    Visitor->>DomainA: Access homepage
-    DomainA->>Visitor: Render homepage with embedded iframe to DomainC/products
-    Visitor->>DomainC: Clicks on "Add to cart" for Product 1
+    Note over User,DomainC: Current Behaviour
+
+    User->>DomainA: Access homepage
+    DomainA->>User: Render homepage with embedded iframe to DomainC/products
+    User->>DomainC: Clicks on "Add to cart" for Product 1
     DomainC->>DomainC: Updates cart cookie
-    DomainC->>Visitor: Updates cart icon count
-    Visitor->>DomainC: Clicks on "Add to cart" for Product 2
+    DomainC->>User: Updates cart icon count
+    User->>DomainC: Clicks on "Add to cart" for Product 2
     DomainC->>DomainC: Updates cart cookie
-    DomainC->>Visitor: Updates cart icon count
-    Visitor->>DomainB: Navigates to DomainB
-    DomainB->>Visitor: Render homepage with embedded iframe to DomainC/products
-    Visitor->>DomainC: Observes the same cart icon count as on domain-aaa.com
-    Visitor->>DomainC: Navigates to cart
+    DomainC->>User: Updates cart icon count
+    User->>DomainB: Navigates to domain-bbb.com
+    DomainB->>User: Render homepage with embedded iframe to DomainC/products
+    User->>DomainC: Observes the same cart icon count as on domain-aaa.com
+    User->>DomainC: Navigates to cart
     DomainC->>DomainC: Fetches cart data from cookie
-    DomainC->>Visitor: Displays cart contents (Product 1 and Product 2)
+    DomainC->>User: Displays cart contents (Product 1 and Product 2)
+
+    Note over User,DomainC: After third-party cookie deprecation
+
+    User->>DomainA: Access homepage again
+    DomainA->>User: Render homepage with embedded iframe to DomainC/products
+    User->>DomainC: Clicks on "Add to cart" for Product 3
+    DomainC-->>DomainC: Cannot set/update cart cookie
+    DomainC->>User: Fails to update cart icon count or displays incorrect count
+    User->>DomainB: Navigates to domain-bbb.com again
+    DomainB->>User: Render homepage with embedded iframe to DomainC/products
+    User->>DomainC: Observes cart icon with no items
+    User->>DomainC: Navigates to cart
+    DomainC-->>DomainC: Cannot fetch cart data from cookie
+    DomainC->>User: Displays empty cart
 ```
 
 ### **Embedded Content - Cross-Domain Embedded Content**
@@ -167,35 +183,35 @@ understand how third-party cookies function when interacting with content embedd
 
 ```mermaid
 sequenceDiagram
-    participant Visitor
+    participant User
     participant DomainA
     participant DomainB
     participant YouTube as YouTube Embed Player
     
 
-    Visitor->>DomainA: Open DomainA
+    User->>DomainA: Open DomainA
     activate DomainA
     DomainA->>YouTube: Load YouTube Embed Player
     activate YouTube
-    Visitor->>YouTube: Play video
-    YouTube->>Visitor: Stream video
-    Visitor->>YouTube: Change preferences (quality, sound level, mute)
-    YouTube->>Visitor: Apply preferences
+    User->>YouTube: Play video
+    YouTube->>User: Stream video
+    User->>YouTube: Change preferences (quality, sound level, mute)
+    YouTube->>User: Apply preferences
     deactivate YouTube
     deactivate DomainA
 
-    Visitor->>DomainB: Open DomainB
+    User->>DomainB: Open DomainB
     activate DomainB
     DomainB->>YouTube: Load YouTube Embed Player
     activate YouTube
-    Visitor->>YouTube: Play video
-    YouTube->>Visitor: Stream video
+    User->>YouTube: Play video
+    YouTube->>User: Stream video
     Note left of YouTube: Check for any existing preferences from previous interactions
-    YouTube-->>Visitor: Display video with previous preferences (if any)
+    YouTube-->>User: Display video with previous preferences (if any)
     deactivate YouTube
     deactivate DomainB
 
-    Note over Visitor, DomainB: Verify if preferences are maintained across domains for the embedded content.
+    Note over User, DomainB: Verify if preferences are maintained across domains for the embedded content.
 ```
 
 ### **Single Sign-On - Cross-Domain Single Sign-On**
@@ -218,6 +234,8 @@ sequenceDiagram
     participant DomainB
     participant DomainC
 
+    Note over User,DomainC: Current Behaviour
+
     User->>DomainA: Visit domain-aaa.com
     DomainA->>User: Render sign-in page
     User->>DomainA: Enter Email & Submit
@@ -226,8 +244,23 @@ sequenceDiagram
     DomainC->>DomainA: Redirect back to domain-aaa.com with login success
     DomainA->>User: Render profile page
     
-    User->>DomainB: Visit DomainB
+    User->>DomainB: Visit domain-bbb.com
     DomainB->>DomainC: Check third-party cookie for login info
     DomainC->>DomainB: Confirm user is logged in
     DomainB->>User: Render profile page
+
+    Note over User,DomainC: After Third-Party Cookies Deprecation
+
+    User->>DomainA: Visit domain-aaa.com
+    DomainA->>User: Render sign-in page
+    User->>DomainA: Enter Email & Submit
+    DomainA->>DomainC: Redirect to domain-ccc.com for SSO login
+    DomainC->>User: Attempt to store email in third-party cookie (Fails)
+    DomainC->>DomainA: Redirect back to domain-aaa.com with login success
+    DomainA->>User: Render profile page
+    
+    User->>DomainB: Visit domain-bbb.com
+    DomainB->>DomainC: Check third-party cookie for login info (Fails)
+    DomainB->>User: Render sign-in page (User needs to log in again)
+
 ```
