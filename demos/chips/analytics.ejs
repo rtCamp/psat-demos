@@ -1,39 +1,40 @@
-<% // views/analytics.ejs %>
-(function(window) {
-// Track user interactions
-function trackInteraction(interaction) {
-if('buttonClickedCHIPS' === interaction ){
-var remoteURL = '<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/chips/trackCHIPS';
-} else {
-var remoteURL = '<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/chips/track';
-}
-fetch(remoteURL, {
-method: 'POST',
-credentials: 'include',
-headers: {
-'Content-Type': 'application/json'
-},
-body: JSON.stringify({interaction: interaction})
-}).then(function(response) {
-if (!response.ok) {
-throw new Error('Network response was not ok');
-}
-return response.text();
-}).then(function(data) {
-var statusDiv = document.getElementById('status');
-if (statusDiv) {
-statusDiv.textContent = 'Interaction tracked for ID : ' + data;
-statusDiv.style.color = 'green';
-}
-}).catch(function(error) {
-var statusDiv = document.getElementById('status');
-if (statusDiv) {
-statusDiv.textContent = 'Interaction could not be tracked.';
-statusDiv.style.color = 'red';
-}
-});
-}
+(
+	function ( window ) {
+		// Track user interactions
+		function trackInteraction( interaction ) {
+			if ( 'buttonClickedCHIPS' === interaction ) {
+				var remoteURL = '<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/chips/trackCHIPS';
+			} else {
+				var remoteURL = '<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/chips/track';
+			}
+			fetch( remoteURL, {
+				method: 'POST',
+				credentials: 'include',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify( {interaction: interaction} )
+			} ).then( function ( response ) {
+				if ( !response.ok ) {
+					throw new Error( 'Network response was not ok' );
+				}
+				return response.text();
+			} ).then( function ( data ) {
+				var statusDiv = document.getElementById( 'status' );
+				if ( statusDiv ) {
+					statusDiv.textContent = 'Interaction tracked for ID : ' + data;
+					statusDiv.style.color = 'green';
+				}
+			} ).catch( function ( error ) {
+				var statusDiv = document.getElementById( 'status' );
+				if ( statusDiv ) {
+					statusDiv.textContent = 'Interaction could not be tracked.';
+					statusDiv.style.color = 'red';
+				}
+			} );
+		}
 
-// Expose the trackInteraction function globally
-window.trackInteraction = trackInteraction;
-})(window);
+		// Expose the trackInteraction function globally
+		window.trackInteraction = trackInteraction;
+	}
+)( window );
