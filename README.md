@@ -29,13 +29,11 @@ Before you can run the Privacy Sandbox Demos, make sure you have the following s
     git clone https://github.com/rtCamp/privacy-sandbox-demos.git
     ```
 
-2.
+2. Navigate to the project directory:
 
-Navigate to the project directory:
-
- ```bash
- cd privacy-sandbox-demos
- ```
+    ```bash
+    cd privacy-sandbox-demos
+    ```
 
 3. Install project dependencies:
     ```bash
