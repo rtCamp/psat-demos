@@ -184,32 +184,39 @@ sequenceDiagram
     participant User
     participant DomainA
     participant DomainB
-    participant YouTube as YouTube Embed Player
-    
+    participant YouTube
 
-    User->>DomainA: Open DomainA
-    activate DomainA
-    DomainA->>YouTube: Load YouTube Embed Player
-    activate YouTube
-    User->>YouTube: Play video
-    YouTube->>User: Stream video
-    User->>YouTube: Change preferences (quality, sound level, mute)
-    YouTube->>User: Apply preferences
-    deactivate YouTube
-    deactivate DomainA
+    Note over User,YouTube: Current Behaviour
 
-    User->>DomainB: Open DomainB
-    activate DomainB
-    DomainB->>YouTube: Load YouTube Embed Player
-    activate YouTube
-    User->>YouTube: Play video
-    YouTube->>User: Stream video
-    Note left of YouTube: Check for any existing preferences from previous interactions
-    YouTube-->>User: Display video with previous preferences (if any)
-    deactivate YouTube
-    deactivate DomainB
+    User->>DomainA: Navigate to DomainA/embedded-video
+    DomainA->>YouTube: Load YouTube video
+    User->>YouTube: Click play & mute
 
-    Note over User, DomainB: Verify if preferences are maintained across domains for the embedded content.
+    User->>DomainB: Navigate to DomainB/embedded-video
+    DomainB->>YouTube: Load YouTube video
+    User->>YouTube: Click play
+    YouTube-->>User: Retained settings & recognize user
+
+    User->>YouTube: Check video history
+    YouTube-->>User: Display videos from DomainA & DomainB
+
+    User->>YouTube: Observe "watch later" button presence
+
+    Note over User,YouTube: After third-party cookie deprecation
+
+    User->>DomainA: Navigate to DomainA/embedded-video
+    DomainA->>YouTube: Load YouTube video
+    User->>YouTube: Click play
+
+    User->>DomainB: Navigate to DomainB/embedded-video
+    DomainB->>YouTube: Load YouTube video
+    User->>YouTube: Click play & mute
+    YouTube-->>User: Settings not retained
+
+    User->>YouTube: Check video history
+    YouTube-->>User: No videos from DomainA & DomainB
+
+    User->>YouTube: "watch later" button absent
 ```
 
 ### **Single Sign-On - Cross-Domain Single Sign-On**
