@@ -1,5 +1,5 @@
 const express = require('express');
-const path = require( "path" );
+const path = require('path');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -9,37 +9,52 @@ router.get('/', (req, res) => {
 		// User is 'logged in', redirect to profile page
 		res.redirect('/single-sign-on/profile');
 	} else {
-		// Show the sign-in page
-		res.render(path.join(__dirname,'index'), { title: '🚧 Single Sign-On Demo' });
-	}
-});
-
-router.post('/sign-in', (req, res) => {
-	const email = req.body.email;
-
-	if (email) {
-		// Set the email address in a cookie
-		res.cookie('email', email, { maxAge: 900000, httpOnly: true });
-		res.redirect('/single-sign-on/profile');
-	} else {
-		res.render(path.join(__dirname,'index'), { title: '🚧 Single Sign-On Demo' });
+		// User is not logged in, redirect to sign-in page
+		res.redirect('/single-sign-on/sign-in');
 	}
 });
 
 router.get('/profile', (req, res) => {
 	const email = req.cookies.email;
+	const domain = req.get('host');
 
 	if (email) {
-		res.render(path.join(__dirname,'profile'), { title: '🚧 Single Sign-On Demo', email: email });
+		res.render(path.join(__dirname, 'profile'), { title: 'Single Sign-On Demo for ' + domain, email: email });
 	} else {
-		res.redirect('/single-sign-on');
+		res.redirect('/single-sign-on/sign-in');
 	}
 });
 
 router.get('/logout', (req, res) => {
-	// Clear the email cookie
+	const domain = req.get('host');
 	res.clearCookie('email');
-	res.render(path.join(__dirname,'logout'), { title: '🚧 Single Sign-On Demo' });
+	res.render(path.join(__dirname, 'logout'), { title: 'Single Sign-On Demo for ' + domain });
+});
+
+router.get('/login', (req, res) => {
+	const domain = req.get('host');
+	const email = req.cookies.email;
+	if (email) {
+		// Render a page that will post a message back to the parent window
+		res.render(path.join(__dirname, 'postmessage'), { email: email });
+	} else {
+		res.render(path.join(__dirname, 'login'), { title: 'Login to ' + domain });
+	}
+});
+
+router.get('/sign-in', (req, res) => {
+	const domain = req.get('host');
+	res.render(path.join(__dirname, 'signin'), { title: 'Single Sign-On Demo for ' + domain, protocol: 'https', domainC: res.locals.domainC });
+});
+
+router.post('/validate', (req, res) => {
+	const email = req.body.email;
+	if (email) {
+		res.cookie('email', email, { maxAge: 900000, httpOnly: true, domain: res.locals.domainC, sameSite: "none", secure: true });
+		res.render(path.join(__dirname, 'postmessage'), { email: email });
+	} else {
+		res.status(400).send('Email validation failed');
+	}
 });
 
 module.exports = router;
