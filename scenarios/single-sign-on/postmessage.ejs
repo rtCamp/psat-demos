@@ -1,0 +1,9 @@
+<script>
+	window.onload = function() {
+		// Send the email back to the parent window
+		window.opener.postMessage({ action: 'login', email: '<%= email %>' }, '*');
+
+		// Close the popup
+		window.close();
+	};
+</script>
