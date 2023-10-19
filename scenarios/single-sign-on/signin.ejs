@@ -18,6 +18,11 @@
 				document.cookie = `localemail=${event.data.email}; path=/; max-age=900000`;
 				window.location.href = '/single-sign-on/profile';
 			}
+			// Recheck from domainC if the user is logged in
+			if (event.data.action === 'login'){
+				var iframe = document.getElementById('checkLoginFrame');
+				iframe.src = iframe.src;
+			}
 		}, false);
 	}
 
