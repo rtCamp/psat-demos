@@ -3,7 +3,7 @@ const path = require('path');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-	const email = req.cookies.email;
+	const email = req.cookies.localemail;
 
 	if (email) {
 		// User is 'logged in', redirect to profile page
@@ -15,7 +15,8 @@ router.get('/', (req, res) => {
 });
 
 router.get('/profile', (req, res) => {
-	const email = req.cookies.email;
+	// Stored for site's own login status
+	const email = req.cookies.localemail;
 	const domain = req.get('host');
 
 	if (email) {
@@ -27,7 +28,7 @@ router.get('/profile', (req, res) => {
 
 router.get('/logout', (req, res) => {
 	const domain = req.get('host');
-	res.clearCookie('email');
+	res.clearCookie('localemail');
 	res.render(path.join(__dirname, 'logout'), { title: 'Single Sign-On Demo for ' + domain });
 });
 
@@ -56,5 +57,11 @@ router.post('/validate', (req, res) => {
 		res.status(400).send('Email validation failed');
 	}
 });
+
+router.get('/check-login-status', (req, res) => {
+	const email = req.cookies.email;
+	res.render(path.join(__dirname, 'check-login-status'), { email: email });
+});
+
 
 module.exports = router;

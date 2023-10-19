@@ -1,0 +1,10 @@
+<% if (email) { %>
+<script>
+	window.onload = function() {
+		// If the user is logged in, send the email back to the parent frame
+		window.parent.postMessage({ action: 'loggedIn', email: '<%= email %>', test: 'testing' }, '*');
+	};
+</script>
+<% } else { %>
+Not logged in
+<% } %>
