@@ -52,7 +52,7 @@ handle_build_server(){
     info "App Build: Started"
     remote_execute "$REMOTE_PATH" "ln -sfn $APP_REMOTE_RELEASE_PATH $REMOTE_PATH/builder"
     echo "::group::Remote Build log."
-    remote_execute "$REMOTE_PATH" "docker compose up builder --no-log-prefix"
+    remote_execute "$REMOTE_PATH" "docker compose up builder --no-log-prefix --exit-code-from builder"
     echo "::endgroup::"
     BUILD_STANDALONE_STATUS="$?"
 
