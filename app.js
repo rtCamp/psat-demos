@@ -46,7 +46,7 @@ demoTypes.forEach(demoType => {
 });
 
 // Mount routes for different scenarios
-const scenarios = ['ecommerce', 'single-sign-on', 'analytics', 'embedded-video', 'payment-flow', 'content-delivery-networks'];
+const scenarios = ['ecommerce', 'single-sign-on', 'analytics', 'embedded-video', 'create-account', 'third-party-auth', 'payment-flow', 'content-delivery-networks', ' recommendations'];
 scenarios.forEach(scenario => {
 	const scenarioRoutes = require(`./scenarios/${scenario}/routes`);
 	app.use(`/${scenario}`, scenarioRoutes);  // Mount the routes on a path specific to the scenario
