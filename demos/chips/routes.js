@@ -29,7 +29,7 @@ router.get( '/analytics.js', ( req, res ) => {
 
 		// Store the analytics ID in a cookie
 		res.cookie( 'analyticsId', analyticsId, {
-			Domain: 'domain-ccc.com',
+			Domain: res.locals.domainC,
 			maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
 			httpOnly: true,
 			sameSite: "none",
@@ -46,6 +46,9 @@ router.get( '/analytics.js', ( req, res ) => {
 		let expire = 30 * 24 * 60 * 60 * 1000;
 		res.append(
 			'Set-Cookie', '__Host-analyticsId-chips=' + analyticsIdCHIPS + '; Max-Age=' + expire + '; HttpOnly; Secure; Path=/; SameSite=None; Partitioned;'
+		);
+		res.append(
+			'Set-Cookie', 'analyticsId-chips-test=' + analyticsIdCHIPS + ';Domain='+res.locals.domainC+'; Max-Age=' + expire + '; HttpOnly; Secure; Path=/; SameSite=None; Partitioned;'
 		);
 	}
 
