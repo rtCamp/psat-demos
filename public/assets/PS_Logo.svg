@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1119.7 1080" style="enable-background:new 0 0 1119.7 1080;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#EEEEEE;stroke-width:17.0265;stroke-miterlimit:9.9999;}
+	.st1{fill:none;stroke:#D7D7D7;stroke-width:17.0265;stroke-miterlimit:10;}
+	.st2{fill:#9CD1FB;}
+	.st3{fill:#05BB72;}
+	.st4{fill:#4582F4;}
+	.st5{fill:#FFFFFF;}
+	.st6{fill:none;stroke:#241F20;stroke-width:16.9202;stroke-miterlimit:10;}
+</style>
+<ellipse transform="matrix(0.7071 -0.7071 0.7071 0.7071 -212.3577 566.9252)" class="st0" cx="578.2" cy="539.8" rx="521.8" ry="365.1"/>
+<circle class="st1" cx="578.2" cy="539.8" r="521.8"/>
+<path class="st2" d="M329.1,132.8h-118c-29.6,0-53.5-24-53.5-53.5l0,0c0-29.6,24-53.5,53.5-53.5h118c29.6,0,53.5,24,53.5,53.5l0,0
+	C382.6,108.7,358.7,132.8,329.1,132.8z"/>
+<path class="st3" d="M226.8,711.8v72.3c0,69.4-45.8,133.6-107.6,152.6c-61.7-19.1-107.5-83-107.5-152.6v-72.3L119.3,664L226.8,711.8
+	z"/>
+<circle class="st3" cx="980" cy="176.7" r="107.6"/>
+<g>
+	<rect x="305.2" y="267" class="st4" width="531.3" height="549.1"/>
+	
+		<ellipse transform="matrix(0.7071 -0.7071 0.7071 0.7071 -141.3667 530.2739)" class="st5" cx="569.4" cy="435.8" rx="104.7" ry="104.7"/>
+	<path class="st5" d="M372.2,720c0-42.1,25.1-80.3,63.8-96.8c92.7-40.4,198.2-40.4,291,0c38.8,16.5,63.8,54.7,63.8,96.8v29.9H372.2
+		V720z"/>
+	<polyline class="st6" points="460.5,816.1 836.5,816.1 836.5,421 	"/>
+</g>
+<polygon class="st2" points="974,936.6 790.3,936.6 761.2,990.1 790.3,1043.6 974,1043.6 1003.1,990.1 "/>
+</svg>
