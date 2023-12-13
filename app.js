@@ -39,14 +39,14 @@ app.use((req, res, next) => {
 });
 
 // Mount routes for different demo types
-const demoTypes = ['chips', 'first-party-sets', 'private-state-tokens', 'fedcm'];
+const demoTypes = ['chips', 'related-websites-sets', 'private-state-tokens', 'fedcm'];
 demoTypes.forEach(demoType => {
 	const demoRoutes = require(`./demos/${demoType}/routes`);
 	app.use(`/${demoType}`, demoRoutes);  // Mount the routes on a path specific to the demo type
 });
 
 // Mount routes for different scenarios
-const scenarios = ['ecommerce', 'single-sign-on', 'analytics', 'embedded-video'];
+const scenarios = ['ecommerce', 'single-sign-on', 'analytics', 'embedded-video', 'create-account', 'third-party-auth', 'payment-flow', 'content-delivery-networks', ' recommendations'];
 scenarios.forEach(scenario => {
 	const scenarioRoutes = require(`./scenarios/${scenario}/routes`);
 	app.use(`/${scenario}`, scenarioRoutes);  // Mount the routes on a path specific to the scenario
