@@ -1,0 +1,22 @@
+<%- include(commonPath + '/header.ejs') %>
+
+<div class="container mx-auto py-8">
+    <div class="bg-inherit rounded-lg p-8 w-full max-w-lg mx-auto text-center">
+        <h1 class="text-3xl font-bold mb-4"><%= title %></h1>
+
+        <% if (typeof message !== 'undefined' && message) { %>
+            <p class="text-lg font-bold mb-4 <%= status ? 'text-green-500' : 'text-red-500' %>"><%- message %></p>
+        <% } else { %>
+
+            <form method="post">
+                <div class="mb-4">
+                    <label for="cardNumber" class="block text-left mb-2">Card Number (Use 4242424242424242 for demo):</label>
+                    <input id="cardNumber" name="cardNumber" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" autocomplete="cc-number" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" maxlength="19" placeholder="xxxx xxxx xxxx xxxx">
+                </div>
+                <input type="submit" value="Submit Payment" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+            </form>
+        <% } %>
+    </div>
+</div>
+
+<%- include(commonPath + '/footer.ejs') %>
