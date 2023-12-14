@@ -35,6 +35,20 @@ app.use((req, res, next) => {
 	res.locals.domainC = process.env['domain-c'];
 	res.locals.port = process.env.port;
 	res.locals.isPortPresent = req.get('host').includes(':');
+	res.locals.currentDomain = req.get( 'host' );
+	switch ( res.locals.currentDomain ) {
+		case res.locals.domainA:
+			res.locals.backgroundColor = process.env['domain-a-background'];
+			break;
+		case res.locals.domainB:
+			res.locals.backgroundColor = process.env['domain-b-background'];
+			break;
+		case res.locals.domainC:
+			res.locals.backgroundColor = process.env['domain-c-background'];
+			break;
+		default:
+			res.locals.backgroundColor = 'bg-gray-100';
+	}
 	next();  // Proceed to the next middleware or route handler
 });
 
