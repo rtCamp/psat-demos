@@ -1,6 +1,5 @@
 <%- include(commonPath + '/header.ejs') %>
 
-<div class="container mx-auto py-8">
 	<h1 class="text-3xl font-bold mb-4 text-center"><%= title %></h1>
 	<p class="text-center">Track user interactions using the analytics code provided below:</p>
 	<script src="<%= protocol %>://<%= domainA %><% if (isPortPresent) { %>:<%= port %><% } %>/chips/analytics.js"></script>
@@ -13,6 +12,5 @@
 		</button>
 	</div>
 	<div id="status" class="text-center mt-4"></div>
-</div>
 
 <%- include(commonPath + '/footer.ejs') %>
