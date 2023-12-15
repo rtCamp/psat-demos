@@ -40,36 +40,13 @@
 </div>
 
 <h2 class="text-3xl font-bold mb-8 text-center">Scenarios</h2>
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-    <a href="/analytics"
-        class="flex flex-col border border-blue justify-center items-center font-bold p-4 bg-white shadow rounded hover:bg-blue-500 hover:text-white aspect-square transition duration-300 text-center">
-        <span class="block text-5xl mb-4">🔎</span>
-        Analytics Tracking
-    </a>
-    <a href="/embedded-video"
-        class="flex flex-col justify-center items-center font-bold p-4 bg-white shadow rounded hover:bg-blue-500 hover:text-white aspect-square transition duration-300 text-center">
-        <span class="block text-5xl mb-4">📽️</span>
-        Embedded Content
-    </a>
-    <a href="/ecommerce"
-        class="flex flex-col justify-center items-center font-bold p-4 bg-white shadow rounded hover:bg-blue-500 hover:text-white aspect-square transition duration-300 text-center">
-        <span class="block text-5xl mb-4">🛒</span>
-        E-Commerce
-    </a>
-    <a href="/single-sign-on"
-        class="flex flex-col justify-center items-center font-bold p-4 bg-white shadow rounded hover:bg-blue-500 hover:text-white aspect-square transition duration-300 text-center">
-        <span class="block text-5xl mb-4">🔐</span>
-        Single Sign-On
-    </a>
-    <a href="/payment-gateway"
-        class="flex flex-col justify-center items-center font-bold p-4 bg-white shadow rounded hover:bg-blue-500 hover:text-white aspect-square transition duration-300 text-center">
-        <span class="block text-5xl mb-4">💳</span>
-        Payment Gateway
-    </a>
-    <a href="/chips"
-        class="flex flex-col justify-center items-center font-bold p-4 bg-white shadow rounded hover:bg-blue-500 hover:text-white aspect-square transition duration-300 text-center">
-        <span class="block text-5xl mb-4">🍪</span>
-        CHIPS
-    </a>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+    <%= renderCard('Analytics Tracking', '🔎', '/analytics') %>
+    <%= renderCard('Embedded Content', '📽️', '/embedded-video') %>
+    <%= renderCard('E-Commerce', '🛒', '/ecommerce') %>
+    <%= renderCard('Single Sign-On', '🔐', '/single-sign-on') %>
+    <%= renderCard('Payment Gateway', '💳', '/payment-gateway') %>
+    <%= renderCard('CHIPS', '🍪', '/chips') %>
 </div>
+
 <%- include(commonPath + '/footer.ejs') %>
