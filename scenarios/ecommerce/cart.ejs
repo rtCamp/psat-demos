@@ -1,6 +1,6 @@
-<%- include(commonPath + '/header.ejs') %>
+<%- include(commonPath + '/header-iframe.ejs') %>
 
-<h1 class="text-3xl font-bold mb-4 text-center">Your Cart</h1>
+<h1 class="text-3xl font-bold my-8 text-center text-slate-800">Your Cart</h1>
 <div id="cart" class="space-y-2 max-w-lg mx-auto"></div>
 <div class="text-center mt-4">
 	<a href="./products" class="text-blue-600 text-lg hover:underline">Back to products</a>
@@ -42,4 +42,4 @@
 	window.addEventListener('load', loadCart);
 </script>
 
-<%- include(commonPath + '/footer.ejs') %>
+<%- include(commonPath + '/footer-iframe.ejs') %>

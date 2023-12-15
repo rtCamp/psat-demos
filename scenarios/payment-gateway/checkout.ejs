@@ -1,13 +1,16 @@
 <%- include(commonPath + '/header.ejs') %>
 
-<div class="bg-white rounded-lg p-8 shadow-lg w-full max-w-lg mx-auto text-center">
-    <h1 class="text-3xl font-bold mb-4">Checkout</h1>
-    <div class="bg-gray-100 p-4 rounded-lg mb-4">
-        <p class="text-lg">Item: <%= item %> - $<%= price %></p>
+    <h1 class="text-3xl font-bold my-8 text-center text-slate-800">Checkout</h1>
+    <div class="bg-white rounded-lg p-8 drop-shadow-[8px_8px_0_rgba(32,33,37,.1)]  w-full max-w-lg mx-auto text-center">
+        <div class="bg-gray-100 p-4 rounded-lg mb-4">
+            <p class="text-lg">Item: <%= item %> - $<%= price %></p>
+        </div>
+        <div class="overflow-hidden  rounded-lg">
+            <iframe src="<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/payment-gateway/payment-form" class="w-full h-96" frameborder="0"></iframe>
+        </div>
+        <p class="text-sm my-8 text-center">
+            Check <a href="https://github.com/GoogleChromeLabs/ps-analysis-tool/wiki/Example-analysis-scenarios" class="text-blue-600 hover:underline" target="_blank" rel="noopener">our documentation</a> to learn more about the Payment gateway and other scenarios.
+        </p>
     </div>
-    <div class="overflow-hidden">
-        <iframe src="<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/payment-gateway/payment-form" class="w-full h-96" frameborder="0"></iframe>
-    </div>
-</div>
 
 <%- include(commonPath + '/footer.ejs') %>

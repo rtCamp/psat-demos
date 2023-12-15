@@ -1,8 +1,9 @@
-<%- include(commonPath + '/header.ejs') %>
+<%- include(commonPath + '/header-iframe.ejs') %>
 
-
-<a href="./cart" id="cart-icon" class="text-blue-600 text-xl hover:underline absolute top-8 right-8">🛒 Cart (0)</a>
-<h1 class="text-3xl font-bold mb-4 text-center">Products</h1>
+<header class="flex justify-between p-8 items-center">
+	<h1 class="text-3xl font-bold m-0 text-slate-800">Products</h1>
+	<a href="./cart" id="cart-icon" class="text-blue-600 text-xl hover:underline">🛒 Cart (0)</a>
+</header>
 <div id="error-message" class="text-center text-red-600 mb-4"></div>
 <ul class="space-y-4">
 	<% [1,2,3].forEach(productNumber => { %>
@@ -54,4 +55,4 @@
 	});
 </script>
 
-<%- include(commonPath + '/footer.ejs') %>
+<%- include(commonPath + '/footer-iframe.ejs') %>
