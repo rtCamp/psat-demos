@@ -13,7 +13,8 @@
     <div id="status" class="text-center text-lg my-4"></div>
     <p class="text-sm my-4 text-center">Check <a href="https://github.com/GoogleChromeLabs/ps-analysis-tool/wiki/Example-analysis-scenarios#how-the-demo-works" class="text-blue-600 hover:underline" target="_blank" rel="noopener">our documentation</a> to learn more about the Analytics Scenarios and other Scenarios.</p>
 </div>
-<div id="status" class="text-center text-lg mt-4"></div>
+
+<script src="<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/analytics/analytics.js"></script>
 
 <script src="<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/analytics/analytics.js"></script>
 
