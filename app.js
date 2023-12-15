@@ -47,7 +47,7 @@ app.use((req, res, next) => {
 			res.locals.backgroundColor = process.env['domain-c-background'];
 			break;
 		default:
-			res.locals.backgroundColor = 'bg-gray-100';
+			res.locals.backgroundColor = 'bg-sky-100';
 	}
 	next();  // Proceed to the next middleware or route handler
 });
