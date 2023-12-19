@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
 	res.render('common/under-construction', {
-		title: '🚧 FedCM Demo'
+		title: '🚧 FedCM - Privacy Sandbox Demos'
 	});
 });
 

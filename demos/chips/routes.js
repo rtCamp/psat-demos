@@ -6,18 +6,18 @@ const uuid = require( 'uuid' );
 router.get('/', (req, res) => {
 	// Send the default page
 	res.render(path.join(__dirname,'index'), {
-		title: 'CHIPS Demo'
+		title: 'CHIPS - Privacy Sandbox Demos'
 	});
 });
 router.get('/analytics-first-party', (req, res) => {
 	res.render(path.join(__dirname,'analytics-first-party'), {
-		title: 'First Party Cookie Experiments'
+		title: 'First Party Cookie - Privacy Sandbox Demos'
 	});
 });
 router.get('/analytics-third-party', (req, res) => {
 	// Send the default page
 	res.render(path.join(__dirname,'analytics-third-party'), {
-		title: 'Third Party Cookie Experiments'
+		title: 'Third Party Cookie - Privacy Sandbox Demos'
 	});
 });
 // Serve the analytics.js file to the site

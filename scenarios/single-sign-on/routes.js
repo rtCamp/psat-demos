@@ -20,7 +20,7 @@ router.get('/profile', (req, res) => {
 	const domain = req.get('host');
 
 	if (email) {
-		res.render(path.join(__dirname, 'profile'), { title: 'Single Sign-On Demo for ' + domain, email: email });
+		res.render(path.join(__dirname, 'profile'), { title: 'Single Sign-On for ' + domain, email: email });
 	} else {
 		res.redirect('/single-sign-on/sign-in');
 	}
@@ -29,7 +29,7 @@ router.get('/profile', (req, res) => {
 router.get('/logout', (req, res) => {
 	const domain = req.get('host');
 	res.clearCookie('localemail');
-	res.render(path.join(__dirname, 'logout'), { title: 'Single Sign-On Demo for ' + domain });
+	res.render(path.join(__dirname, 'logout'), { title: 'Single Sign-On for ' + domain });
 });
 
 router.get('/login', (req, res) => {

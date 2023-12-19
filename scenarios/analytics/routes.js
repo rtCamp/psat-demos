@@ -5,7 +5,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
     // Send the default page
     res.render(path.join(__dirname,'index'), {
-        title: 'Analytics Demo'
+        title: 'Analytics - Privacy Sandbox Demos'
     });
 });
 
