@@ -1,15 +1,14 @@
 <%- include(commonPath + '/header.ejs') %>
 
-
-	<h1 class="text-3xl font-bold my-8 text-center text-slate-800">E-Commerce</h1>
-	<div class="border p-8 bg-white drop-shadow-[8px_8px_0_rgba(32,33,37,.1)] rounded-lg text-center">
-		<p class="text-lg my-8 text-center">Here is an embedded Third-Party e-commerce site, check if you can add products to cart.</p>
-		<div class="mt-8 flex justify-center">
-			<iframe src="<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/ecommerce/products" class="border border-2 rounded-lg w-1/2 h-96"></iframe>
-		</div>
-		<p class="text-sm mt-8 text-center">
-			Check <a href="https://github.com/GoogleChromeLabs/ps-analysis-tool/wiki/Example-analysis-scenarios#e-commerce-cross-domain-shopping-cart" class="text-blue-600 hover:underline" target="_blank" rel="noopener">our documentation</a> to learn more about the Cross-domain Cart and other scenarios.
-		</p>
+<h1 class="text-3xl font-bold my-8 text-center text-slate-800">E-Commerce</h1>
+<div class="border p-8 bg-white drop-shadow-[8px_8px_0_rgba(32,33,37,.1)] rounded-lg text-center">
+	<p class="text-lg my-8 text-center">Here is an embedded Third-Party e-commerce site, check if you can add products to cart.</p>
+	<div class="mt-8 flex justify-center">
+		<iframe src="<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/ecommerce/products" class="border border-2 rounded-lg w-1/2 h-96"></iframe>
 	</div>
+	<p class="text-sm mt-8 text-center">
+		Check <a href="https://github.com/GoogleChromeLabs/ps-analysis-tool/wiki/Example-analysis-scenarios#e-commerce-cross-domain-shopping-cart" class="text-blue-600 hover:underline" target="_blank" rel="noopener">our documentation</a> to learn more about the Cross-domain Cart and other scenarios.
+	</p>
+</div>
 
 <%- include(commonPath + '/footer.ejs') %>
