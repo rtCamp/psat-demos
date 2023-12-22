@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get( '/', ( req, res ) => {
 	res.render( path.join( __dirname, 'checkout' ), {
-		title: 'Payment Gateway Demo',
+		title: 'Payment Gateway',
 		item: "Virtual Badge for testing the site",
 		price: 10,
 	} );

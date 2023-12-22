@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     res.render(path.join(__dirname,'index'), {
-        title: 'Embedded Video Demo'
+        title: 'Embedded Video'
     });
 });
 module.exports = router;
