@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
 	res.sendFile(path.join(__dirname, 'index.html'));
-	res.render('common/under-construction', {
+	res.render('src/common/under-construction', {
 		title: '🚧 Private State Tokens Demo'
 	});
 });

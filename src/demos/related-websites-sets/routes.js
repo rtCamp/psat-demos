@@ -3,7 +3,7 @@ const path = require('path');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-	res.render('common/under-construction', {
+	res.render('src/common/under-construction', {
 		title: '🚧 Related Website  Sets Demo'
 	});
 });
