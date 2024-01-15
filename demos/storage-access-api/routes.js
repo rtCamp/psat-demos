@@ -1,50 +1,54 @@
+// Import required libraries
 const express = require('express');
 const path = require('path');
 const router = express.Router();
-const uuid = require( 'uuid' );
 
+// Middleware to setup common rendering variables
+router.use((req, res, next) => {
+	// Set common variables for rendering views
+	res.locals.title =  'Storage Access API' // Set the page title
+	next();  // Continue to the next middleware or route handler
+});
+
+// Route to serve the home page
 router.get('/', (req, res) => {
-    	res.render(path.join(__dirname,'index'), {
-		title: 'Storage Access API'
-	    });
+	// Render the index view (homepage)
+	res.render(path.join(__dirname,'index'));
 });
 
-// Serve the analytics.js file to the site
-router.get('/analytics.js', (req, res) => {
-    let userName = req.cookies.userName;
-
-    // An array of 20 most commonly used names
-    const commonNames = [
-        "Liam", "Olivia", "Noah", "Emma", "Oliver", "Ava", "Isabella", "Sophia", "Mia", "Charlotte",
-        "Amelia", "Harper", "Evelyn", "Abigail", "Emily", "Elizabeth", "Mila", "Ella", "Scarlett", "Grace"
-    ];
-
-    // Function to randomly select a name from the array
-    function getRandomName(array) {
-        const randomIndex = Math.floor(Math.random() * array.length);
-        return array[randomIndex];
-    }
-
-    // Call the function to get a random name
-    const randomName = getRandomName(commonNames);
-    if (!userName) {
-
-        // Generate a new user name
-        userName = randomName;
-
-        // Store the user name in a cookie
-        res.cookie('userName', userName, {
-            Domain: res.locals.domainC,
-            maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-            httpOnly: true,
-            sameSite: "none",
-            secure: true
-        });
-    }
-
-    // Set the appropriate content type and send the analytics code
-    res.set('Content-Type', 'application/javascript');
-    res.render(path.join(__dirname,'analytics'));
+// Route to serve the products page
+router.get('/products', (req, res) => {
+	// Render the products view
+	res.render(path.join(__dirname,'products'));
 });
 
+// Route to get cart data
+router.get('/cart-data', (req, res) => {
+	// Check if cart data exists in cookies, parse it to JSON, or initialize an empty array
+	let cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
+	// Send cart data as JSON
+	res.json(cart);
+});
+
+// Route to serve the cart page
+router.get('/cart', (req, res) => {
+	// Render the cart view
+	res.render(path.join(__dirname,'cart'));
+});
+
+// Route to handle adding items to cart
+router.get('/add-to-cart', (req, res) => {
+	// Get the product ID from the query parameters
+	const productId = req.query.productId;
+	// Check if cart data exists in cookies, parse it to JSON, or initialize an empty array
+	let cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
+	// Add the new product ID to the cart array
+	cart.push(productId);
+	// Update the cart cookie with the new cart data
+	res.cookie('cart', JSON.stringify(cart), { maxAge: 900000, httpOnly: true, sameSite: 'none', secure:true });
+	// Send a success message along with a 200 OK status
+	res.status(200).send({ message: 'Success' });
+});
+
+// Export the router to be used in other parts of the application
 module.exports = router;
