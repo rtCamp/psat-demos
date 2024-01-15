@@ -1,0 +1,46 @@
+<%- include(commonPath + '/header.ejs') %>
+
+<div class="container mx-auto py-8">
+    <h1 class="text-3xl font-bold mb-4 text-center">Your Cart</h1>
+    <div id="cart" class="space-y-2 max-w-lg mx-auto"></div>
+    <div class="text-center mt-4">
+        <a href="./products" class="text-blue-600 text-lg hover:underline">Back to products</a>
+    </div>
+</div>
+<script>
+	async function loadCart() {
+		try {
+			const res = await fetch('./cart-data');
+			const data = await res.json();
+			const cartElement = document.getElementById('cart');
+
+			// Group products by ID and count them
+			const productCounts = data.reduce((acc, productId) => {
+				acc[productId] = (acc[productId] || 0) + 1;
+				return acc;
+			}, {});
+
+			// Create a list of product details
+			const productDetails = Object.entries(productCounts).map(([productId, count]) => {
+				return {
+					productId,
+					count
+				};
+			});
+
+			// Display the product details in the cart element
+			cartElement.innerHTML = productDetails.map(detail => `
+                    <div class="flex items-center space-x-2 p-2 bg-white rounded shadow mb-2">
+                        <span class="text-2xl">📦</span>
+                        <span>Product #${detail.productId} (Count: ${detail.count})</span>
+                    </div>
+                `).join('');
+		} catch (error) {
+			console.error('Error:', error);
+		}
+	}
+	// Use the addEventListener method to register the load event
+	window.addEventListener('load', loadCart);
+</script>
+
+<%- include(commonPath + '/footer.ejs') %>
