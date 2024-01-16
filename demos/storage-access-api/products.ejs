@@ -1,0 +1,121 @@
+<%- include(commonPath + '/header.ejs') %>
+
+<div class="container mx-auto py-8 relative">
+	<header class="flex justify-between pb-8 items-center">  
+    	<h1 class="text-3xl font-bold m-0 text-slate-800">Products</h1>
+		<a href="./cart" id="cart-icon" class="text-blue-600 text-xl hover:underline">🛒 Cart (0)</a>
+		<button
+       		id="load-cart-btn"
+        	class="ml-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300"
+      	>
+        Load Cart
+      </button>
+	</header>
+	<div id="error-message" class="text-center text-red-600 mb-4"></div>
+    <ul class="space-y-4">
+		<% [1,2,3].forEach(productNumber => { %>
+			<li class="text-center">
+				<span>Product <%= productNumber %></span>
+				<button onclick="addToCart('<%= productNumber %>')" class="ml-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300">Add to cart</button>
+			</li>
+		<% }) %>
+    </ul>
+</div>
+<script>
+	let firstRun = true;
+	let hasAccess = false;
+	const isIframe = window.self !== window.top;
+
+	const cartIcon = document.getElementById('cart-icon');
+	const errorMessage = document.getElementById('error-message');
+	const refreshCartButton = document.querySelector("#load-cart-btn");
+
+	if (refreshCartButton)
+  		refreshCartButton.addEventListener("click", refreshCookies);
+
+	async function refreshCookies() {
+		if (!hasAccess) {
+			console.log(
+			"Don't have access. Trying again within this click handler, in case it needed a prompt."
+			);
+			try {
+				await document.requestStorageAccess();
+				hasAccess = true; // Can assume this was true is above did not reject
+				console.log("Have access now thanks to prompt");
+				errorMessage.textContent = "";
+				cartIcon.classList.remove("hidden");
+				refreshCartButton.classList.add("hidden");
+			} catch (err) {
+				console.log("requestStorageAccess Error:", err);
+				errorMessage.textContent =
+					"Permission denied. Either blocked by user or browser";
+			}
+
+			hasAccess = await document.hasStorageAccess();
+			console.log("Updated hasAccess:", hasAccess);
+		}
+		updateCartIcon();
+	}
+
+	function addToCart(productId) {
+		if (hasAccess || !isIframe) {
+			fetch(`./add-to-cart?productId=${productId}`)
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Failed to add product to cart');
+					}
+					return response.json();
+				})
+				.then(() => updateCartIcon())
+				.catch(error => errorMessage.textContent = `Error: ${error}`);
+		} else {
+			errorMessage.textContent =  "Cookie access denied";
+		}
+	}
+
+	function updateCartIcon() {
+		fetch('./cart-data')
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('Failed to fetch cart data');
+				}
+				return response.json();
+			})
+			.then(data => {
+				const cartIconText = `🛒 Cart (${data.length})`;
+				cartIcon.textContent = cartIconText;
+				errorMessage.textContent = (data.length === 0 && !firstRun) ? 
+					'Unable to add to cart' : '';
+			
+				firstRun = false;
+			})
+			.catch(error => errorMessage.textContent = `Error:', ${error}`);
+	}
+
+	async function initCart() {
+		if (isIframe) {
+			if (!document.requestStorageAccess) {
+				errorMessage.textContent = "Storage Access API not supported";
+				return true;
+			}
+
+			cartIcon.classList.add("hidden");
+			refreshCartButton.classList.remove("hidden");
+
+			hasAccess = await document.hasStorageAccess();
+
+			if (hasAccess) {
+				hasAccess = true;
+				cartIcon.classList.remove("hidden");
+				refreshCartButton.classList.add("hidden");
+			} else {
+				errorMessage.textContent = "Cookie access denied";
+			}
+		}
+		updateCartIcon();
+	}
+
+	initCart();
+</script>
+
+<%- include(commonPath + '/footer.ejs') %>
