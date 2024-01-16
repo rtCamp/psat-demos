@@ -38,12 +38,9 @@
 				.then(data => {
 					const cartIconText = `🛒 Cart (${data.length})`;
 					document.getElementById('cart-icon').textContent = cartIconText;
+					document.getElementById('error-message').textContent = (data.length === 0 && !firstRun) ? 
+						'Unable to add to cart' : '';
 
-					if (data.length === 0 && !firstRun) {
-						document.getElementById('error-message').textContent = 'Unable to add to cart';
-					} else {
-						document.getElementById('error-message').textContent = '';
-					}
 					firstRun = false;
 				})
 				.catch(error => console.error('Error:', error));
