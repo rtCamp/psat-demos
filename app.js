@@ -28,7 +28,7 @@ app.set('views', __dirname);  // Set the views directory
 
 // Middleware to set global variables for use in EJS templates
 app.use((req, res, next) => {
-	res.locals.commonPath = path.join(__dirname, 'common');
+	res.locals.commonPath = path.join(__dirname, 'src/common');
 	res.locals.protocol = process.env.protocol;
 	res.locals.domainA = process.env['domain-a'];
 	res.locals.domainB = process.env['domain-b'];
@@ -53,9 +53,9 @@ app.use((req, res, next) => {
 });
 
 // Mount routes for different demo types
-const demoTypes = ['chips', 'first-party-sets', 'private-state-tokens', 'fedcm', 'storage-access-api'];
+const demoTypes = ['chips', 'related-websites-sets', 'private-state-tokens', 'fedcm', 'storage-access-api'];
 demoTypes.forEach(demoType => {
-	const demoRoutes = require(`./demos/${demoType}/routes`);
+	const demoRoutes = require(`./src/demos/${demoType}/routes`);
 	app.use(`/${demoType}`, demoRoutes);  // Mount the routes on a path specific to the demo type
 });
 
@@ -68,13 +68,13 @@ const scenarios = [
 	'payment-gateway',
 ];
 scenarios.forEach(scenario => {
-	const scenarioRoutes = require(`./scenarios/${scenario}/routes`);
+	const scenarioRoutes = require(`./src/scenarios/${scenario}/routes`);
 	app.use(`/${scenario}`, scenarioRoutes);  // Mount the routes on a path specific to the scenario
 });
 
 // Catch-all route handler for unmatched routes, rendering the default page
 app.use((req, res) => {
-	res.render(path.join(__dirname, 'common/index'), {
+	res.render(path.join(__dirname, 'src/common/index'), {
 		title: 'Privacy Sandbox Demos'
 	});
 });

@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
 	res.render('common/under-construction', {
-		title: '🚧 First Party Sets Demo'
+		title: '🚧 Related Website  Sets Demo'
 	});
 });
 
