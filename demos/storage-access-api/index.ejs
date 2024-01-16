@@ -1,12 +1,25 @@
 <%- include(commonPath + '/header.ejs') %>
 
 <div class="container mx-auto py-8">
-	<h1 class="text-3xl font-bold mb-4 text-center">E-Commerce with Storage Access API</h1>
-	<p class="text-lg font-bold mb-4 text-center">Here is an embedded Third-Party e-commerce site, using Storage Access API to test it 
-	you should interact with the top level site <a href="">here<a></p>
+	<h1 class="text-3xl font-bold mb-4 text-center">
+		E-Commerce with Storage Access API
+	</h1>
+	<p class="text-lg mb-4 text-center">
+		Here is an embedded Third-Party e-commerce site, using Storage Access API to test it 
+	you should interact with the top level site first, then you can interact with the embedded site.
+	<a
+		class="font-bold text-blue-500" 
+		href="<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/storage-access-api/products"
+		target="_blank"
+		rel="noopener noreferrer"
+		>here</a>
+	</p>
 	
 	<div class="mt-8 flex justify-center">
-		<iframe src="<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/ecommerce/products" class="border border-8 rounded w-1/2 h-96"></iframe>
+		<iframe 
+			src="<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/storage-access-api/products" 
+			class="border border-8 rounded w-1/2 h-96"
+		></iframe>
 	</div>
 </div>
 
