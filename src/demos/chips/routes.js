@@ -6,7 +6,7 @@ const uuid = require( 'uuid' );
 router.get('/', (req, res) => {
 	// Send the default page
 	res.render(path.join(__dirname,'index'), {
-		title: 'CHIPS Demo'
+		title: 'CHIPS'
 	});
 });
 router.get('/analytics-first-party', (req, res) => {
