@@ -4,8 +4,8 @@
   "description": "Privacy Sandbox Demos",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "watch": "nodemon app.js"
+    "start": "tailwindcss -i src/styles/input.css -o public/assets/styles/style.css && node app.js",
+    "watch": "tailwindcss -i src/styles/input.css -o public/assets/styles/style.css && nodemon app.js"
   },
   "author": "rtCamp",
   "dependencies": {
@@ -19,6 +19,8 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "prettier": "3.1.1",
+    "tailwindcss": "^3.3.6"
   }
 }

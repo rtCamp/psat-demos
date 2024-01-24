@@ -1,0 +1,18 @@
+<%- include(commonPath + '/header.ejs') %>
+
+    <div class="container mx-auto py-8">
+        <h1 class="text-3xl font-bold my-8 text-center text-slate-800">Analytics</h1>
+
+        <div class="border p-8 bg-white drop-shadow-[8px_8px_0_rgba(32,33,37,.1)] rounded-lg text-center">
+            <p class="text-lg mb-4 text-center">Here is a button that tracks clicks using a third-party analytics service; check if it works.</p>
+
+            <div class="flex justify-center space-x-4 my-10">
+                <button onclick="trackInteraction('buttonClicked')" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300">
+                    Track me!
+                </button>
+            </div>
+            <div id="status" class="text-center text-lg my-4"></div>
+        </div>
+    </div>
+
+<%- include(commonPath + '/footer.ejs') %>

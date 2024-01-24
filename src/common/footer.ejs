@@ -1,0 +1,14 @@
+
+    <footer class="main-footer mt-auto text-center p-2 text-xs bg-white rounded-lg m-4 container-lg">
+        This project is part of the Privacy Sandbox Analysis Tool. To learn more, visit our <a href="https://github.com/GoogleChromeLabs/ps-analysis-tool/wiki" class="text-blue-600 hover:underline" target="_blank" rel="noopener">Wiki Page</a>.
+    </footer>
+    <script>
+        const mainFooter = document.querySelector('.main-footer');
+        const isIframe = window.self !== window.top;
+        
+        if (mainFooter && isIframe) {
+           mainFooter.remove(); 
+        }
+    </script>
+</body>
+</html>

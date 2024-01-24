@@ -1,0 +1,38 @@
+<%- include(commonPath + '/header.ejs') %>
+
+<div class="container mx-auto py-8">
+	<h1 class="text-3xl font-bold mb-4 text-center">Single Sign-On</h1>
+	<div class="text-center">
+		<button id="signInButton" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full inline-block">Sign In</button>
+	</div>
+</div>
+
+<script>
+	window.onload = function() {
+		window.addEventListener('message', function(event) {
+			// Ensure the postMessage is coming from domainC
+			if (event.origin !== '<%= protocol %>://<%= domainC %>') return;
+
+			if (event.data.action === 'loggedIn') {
+				// Set the localemail cookie for domainA
+				document.cookie = `localemail=${event.data.email}; path=/; max-age=900000`;
+				window.location.href = '/single-sign-on/profile';
+			}
+			// Recheck from domainC if the user is logged in
+			if (event.data.action === 'login'){
+				var iframe = document.getElementById('checkLoginFrame');
+				iframe.src = iframe.src;
+			}
+		}, false);
+	}
+
+
+	document.getElementById('signInButton').addEventListener('click', function() {
+		const win = window.open('<%= protocol %>://<%= domainC %>/single-sign-on/login', 'Login to SSO', 'width=500,height=500');
+	});
+</script>
+
+<!-- Hidden iframe to check login status on domainC -->
+<iframe id="checkLoginFrame" src="<%= protocol %>://<%= domainC %>/single-sign-on/check-login-status" style="display:none;"></iframe>
+
+<%- include(commonPath + '/footer.ejs') %>
