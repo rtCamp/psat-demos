@@ -1,24 +1,22 @@
 <%- include(commonPath + '/header.ejs') %>
 
-<% const scenarioButton = (title, link) => { %>
+<% const renderCard = (title, emoji, link) => { %>
     <a href="<%= link %>"
-        class="block p-4 bg-white shadow rounded hover:bg-blue-500 hover:text-white transition duration-300">
+        class="flex flex-col border border-blue justify-center items-center font-bold p-4 bg-white drop-shadow-[8px_8px_0_rgba(32,33,37,.1)] rounded-md hover:bg-blue-500 hover:text-white aspect-square transition duration-300 text-center">
+        <span class="block text-5xl mb-4"><%= emoji %></span>
         <%= title %>
     </a>
 <% } %>
 
 <div class="container-lg mx-auto py-8">
-    <section class="text-center mb-4">
-        <h2 class="text-3xl font-bold mb-4 text-center">Scenarios</h2>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-            <%= scenarioButton('🔎 Analytics Tracking', '/analytics') %>
-            <%= scenarioButton('📽️ Embedded Content', '/embedded-video') %>
-            <%= scenarioButton('🛒 E-Commerce', '/ecommerce') %>
-            <%= scenarioButton('🔐 Single Sign-On', '/single-sign-on') %>
-            <%= scenarioButton('💳 Payment Gateway', '/payment-gateway') %>
-            <%= scenarioButton('🍪 CHIPS', '/chips') %>
-        </div>
-    </section>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 mt-8">
+        <%= renderCard('Analytics Tracking', '🔎', '/analytics') %>
+        <%= renderCard('Embedded Content', '📽️', '/embedded-video') %>
+        <%= renderCard('E-Commerce', '🛒', '/ecommerce') %>
+        <%= renderCard('Single Sign-On', '🔐', '/single-sign-on') %>
+        <%= renderCard('Payment Gateway', '💳', '/payment-gateway') %>
+        <%= renderCard('CHIPS', '🍪', '/chips') %>
+    </div>
 </div>
 
 <%- include(commonPath + '/footer.ejs') %>
