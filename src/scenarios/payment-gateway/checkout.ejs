@@ -1,12 +1,10 @@
 <%- include(commonPath + '/header.ejs') %>
 
 <div class="container mx-auto py-8">
-    <div class="bg-white rounded-lg p-8 shadow-lg w-full max-w-lg mx-auto text-center">
-        <h1 class="text-3xl font-bold mb-4">Checkout</h1>
-        <div class="bg-gray-100 p-4 rounded-lg mb-4">
-            <p class="text-lg">Item: <%= item %> - $<%= price %></p>
-        </div>
-        <div class="overflow-hidden">
+    <h1 class="text-3xl font-bold mb-4 text-center text-slate-800">Checkout</h1>
+    <div class="border p-8 bg-white drop-shadow-[8px_8px_0_rgba(32,33,37,.1)] rounded-lg text-center w-[50rem] mx-auto max-w-full">
+        <p class="bg-gray-100 p-4 rounded-lg mb-4 text-lg">Item: <%= item %> - $<%= price %></p>
+        <div class="overflow-hidden rounded-lg">
             <iframe src="<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/payment-gateway/payment-form" class="w-full h-96" frameborder="0"></iframe>
         </div>
     </div>
