@@ -2,7 +2,7 @@
 
 <% const renderCard = (title, emoji, link, description ) => { %>
     <a href="<%= link %>"
-        class="flex flex-col border border-blue p-4 bg-white drop-shadow-[8px_8px_0_rgba(32,33,37,.1)] rounded-md hover:bg-blue-500 hover:text-white aspect-square transition duration-300">
+        class="border border-blue p-4 bg-white drop-shadow-[8px_8px_0_rgba(32,33,37,.1)] rounded-md hover:bg-blue-500 hover:text-white aspect-square transition duration-300 size-20">
         <span class="block text-5xl mb-4"><%= emoji %></span>
         <h3 class="font-bold"><%= title %></h3>
         <p><%= description %></p>
@@ -10,8 +10,8 @@
 <% } %>
 
 <div class="container-lg mx-auto py-8">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 mt-8">
-        <%= renderCard('Analytics Tracking', '🔎', '/analytics','description') %>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 mt-8 ">
+        <%= renderCard('Analytics Tracking', '🔎', '/analytics','description with more text from card') %>
         <%= renderCard('Embedded Content', '📽️', '/embedded-video','description') %>
         <%= renderCard('E-Commerce', '🛒', '/ecommerce','description') %>
         <%= renderCard('Single Sign-On', '🔐', '/single-sign-on','description') %>
