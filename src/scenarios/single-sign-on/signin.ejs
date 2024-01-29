@@ -1,10 +1,9 @@
 <%- include(commonPath + '/header.ejs') %>
 
 <div class="container mx-auto py-8">
-	<h1 class="text-3xl font-bold mb-4 text-center">Single Sign-On</h1>
-	<div class="text-center">
+    <%- include(commonPath + '/internal-page/header.ejs') %>
 		<button id="signInButton" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full inline-block">Sign In</button>
-	</div>
+	<%- include(commonPath + '/internal-page/footer.ejs') %>
 </div>
 
 <script>

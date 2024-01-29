@@ -1,13 +1,10 @@
 <%- include(commonPath + '/header.ejs') %>
 
-<div class="container mx-auto py-8">
-    <div class="bg-white rounded-lg p-8 shadow-lg w-full max-w-lg mx-auto text-center">
-        <h1 class="text-3xl font-bold mb-4">Welcome</h1>
+    <%- include(commonPath + '/internal-page/header.ejs') %>
         <p class="text-lg font-bold mb-4">You are logged in as <%= email %></p>
         <div class="text-center">
             <a href="/single-sign-on/logout" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full inline-block">Logout</a>
         </div>
-    </div>
-</div>
+    <%- include(commonPath + '/internal-page/footer.ejs') %>
 
 <%- include(commonPath + '/footer.ejs') %>
