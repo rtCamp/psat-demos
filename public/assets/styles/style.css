@@ -702,8 +702,16 @@ video {
   width: 6rem;
 }
 
+.w-\[60rem\] {
+  width: 60rem;
+}
+
 .w-full {
   width: 100%;
+}
+
+.max-w-full {
+  max-width: 100%;
 }
 
 .max-w-lg {
