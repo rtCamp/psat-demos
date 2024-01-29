@@ -1,13 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,ejs,js}"],
+  content: ["./src/**/*.{html,ejs,js,css}"],
   theme: {
     fontFamily: {
       'sans' : ['Open Sans', 'sans-serif'],
     },
     extend: {},
   },
-  plugins: [],
+  plugins: [{
+    tailwindcss: {},
+    autoprefixer: {},
+  },],
   safelist: [
     'bg-sky-50',
     'bg-green-100',
@@ -15,4 +18,3 @@ module.exports = {
     'bg-red-100',
   ],
 }
-
