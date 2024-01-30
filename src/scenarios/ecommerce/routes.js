@@ -13,7 +13,9 @@ router.use((req, res, next) => {
 // Route to serve the home page
 router.get('/', (req, res) => {
 	// Render the index view (homepage)
-	res.render(path.join(__dirname,'index'));
+	res.render(path.join(__dirname,'index'), {
+        title: 'E-commerce'
+    });
 });
 
 // Route to serve the products page
