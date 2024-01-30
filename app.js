@@ -4,7 +4,11 @@ const app = express();
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const helmet = require('helmet');
+
 require('dotenv').config();  // Load environment variables from .env file
+
+app.use(helmet());  // Configure Helmet to set appropriate HTTP headers for security
 
 // Configure CORS (Cross-Origin Resource Sharing) for handling cross-origin requests
 app.use(cors({
