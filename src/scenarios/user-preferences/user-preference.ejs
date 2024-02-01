@@ -1,0 +1,39 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const baseURL = '<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/user-preferences';
+    const pageContainer = document.getElementById('theme-container');
+    const themeSwitcher = document.getElementById('dark-mode-switch');
+    
+    function updateUserPreference() {
+        fetch(`${baseURL}/get-user-preference`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const theme = data.theme;
+                console.log(data.theme)
+                pageContainer.className = theme;
+                themeSwitcher.checked = theme === 'dark';
+            })
+            .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+            }); 
+    }
+
+    function toggleTheme() {
+        fetch( `${baseURL}/set-user-preference`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ theme: themeSwitcher?.checked ? 'dark' : 'light' })
+        })
+        .then(response => response.json())
+        .then(data => {
+            pageContainer.className = data.theme;
+        });
+    }
+    window.toggleTheme = toggleTheme;
+    updateUserPreference();
+});
