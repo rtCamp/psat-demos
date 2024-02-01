@@ -440,6 +440,91 @@ video {
   display: none;
 }
 
+:root {
+  --bullet-toggle-size: 46px;
+  --toogle-width: 100px;
+  --toogle-height: 54px;
+  --light-mode-background: #f1c40f;
+  --dark-mode-background: #025BDF;
+  --dark-container-background: #3F3F3F;
+  --dark-container-text: #fff;
+}
+
+.dark-mode-toggle {
+  position: relative;
+  display: inline-block;
+  width: var(--toogle-width);
+  height: var(--toogle-height);
+}
+
+.dark-mode-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.dark-mode-toggle label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #EEE;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.dark .dark-mode-toggle label {
+  background-color: #fff;
+}
+
+.dark-mode-toggle label .bullet {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  transform: translate(0, -50%);
+  width: var(--bullet-toggle-size);
+  aspect-ratio: 1;
+  background-color: var(--light-mode-background);
+  border-radius: 50%;
+  transition: background-color 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dark-mode-toggle input:checked + label .bullet {
+  background-color: var(--dark-mode-background);
+  left: 95%;
+  transform: translate(-100%, -50%);
+}
+
+.sun,
+  .moon {
+  position: relative;
+  z-index: 100;
+  fill: #fff;
+}
+
+.moon {
+  display: none;
+}
+
+.dark-mode-toggle input:checked + label .moon {
+  display: block;
+}
+
+.dark-mode-toggle input:checked + label .sun {
+  display: none;
+}
+
+.dark .page-card {
+  background-color: var(--dark-container-background);
+  color: var(--dark-container-text);
+}
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -720,6 +805,10 @@ video {
 
 .max-w-lg {
   max-width: 32rem;
+}
+
+.transform {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .appearance-none {
