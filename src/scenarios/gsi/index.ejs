@@ -1,0 +1,31 @@
+<%- include(commonPath + '/header.ejs') %>
+
+<div class="container mx-auto py-8">
+    <h1 class="text-3xl font-bold mb-4 text-center">Legacy Google Sign-in</h1>
+    <p class="text-lg font-bold mb-4 text-center">Please login to test this demo.</p>
+    <div class="flex justify-center">
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <button id="signout-btn" class="hidden ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="signOut()">Sign Out</button>
+    </div>
+    <div id="status" class="text-center text-lg mt-4"></div>
+</div>
+
+<script>
+    const statusMessage = document.getElementById('status');
+    const signoutBtn = document.getElementById('signout-btn');
+
+    function onSignIn(googleUser) {
+        signoutBtn.classList.remove('hidden');
+        const profile = googleUser.getBasicProfile();
+        statusMessage.textContent = 'Hello ' + profile.getName() + '!';
+    }
+
+    function signOut() {
+        const auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+        statusMessage.textContent = '';
+        });
+    }
+</script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<%- include(commonPath + '/footer.ejs') %>
