@@ -4,14 +4,9 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
 	const email = req.cookies.localemail;
-
-	if (email) {
-		// User is 'logged in', redirect to profile page
-		res.redirect('/single-sign-on/profile');
-	} else {
-		// User is not logged in, redirect to sign-in page
-		res.redirect('/single-sign-on/sign-in');
-	}
+	// User is 'logged in', redirect to profile page or sign-in page
+	const redirectURL = (email) ? '/single-sign-on/profile' : '/single-sign-on/sign-in';	
+	res.redirect(redirectURL);
 });
 
 router.get('/profile', (req, res) => {
@@ -20,7 +15,7 @@ router.get('/profile', (req, res) => {
 	const domain = req.get('host');
 
 	if (email) {
-		res.render(path.join(__dirname, 'profile'), { title: 'Single Sign-On Demo for ' + domain, email: email });
+		res.render(path.join(__dirname, 'profile'), { title: 'Welcome ' + email, email: email });
 	} else {
 		res.redirect('/single-sign-on/sign-in');
 	}
@@ -29,7 +24,7 @@ router.get('/profile', (req, res) => {
 router.get('/logout', (req, res) => {
 	const domain = req.get('host');
 	res.clearCookie('localemail');
-	res.render(path.join(__dirname, 'logout'), { title: 'Single Sign-On Demo for ' + domain });
+	res.render(path.join(__dirname, 'logout'), { title: 'Single Sign-On for ' + domain });
 });
 
 router.get('/login', (req, res) => {
@@ -45,7 +40,7 @@ router.get('/login', (req, res) => {
 
 router.get('/sign-in', (req, res) => {
 	const domain = req.get('host');
-	res.render(path.join(__dirname, 'signin'), { title: 'Single Sign-On Demo for ' + domain, protocol: 'https', domainC: res.locals.domainC });
+	res.render(path.join(__dirname, 'signin'), { title: 'Single Sign-On for ' + domain, protocol: 'https', domainC: res.locals.domainC });
 });
 
 router.post('/validate', (req, res) => {

@@ -1,11 +1,15 @@
 <%- include(commonPath + '/header.ejs') %>
 
-<div class="container mx-auto py-8">
-    <h1 class="text-3xl font-bold mb-4 text-center">Embedded Video Demo</h1>
-    <p class="text-lg font-bold mb-4 text-center">Here is an embedded Third-Party video player, check if you can play the video and if it shows up in your history in your logged in account.</p>
-    <div class="mt-8 flex justify-center">
-        <iframe class="border border-8 rounded" width="560" height="315" src="https://www.youtube.com/embed/aqz-KE-bpKQ?si=CuSLBTjNMf9NA1eg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    </div>
-</div>
+    <%- include(commonPath + '/internal-page/header.ejs') %>
+        <p class="text-lg font-bold mb-4 text-center">Here is an embedded Third-Party video player, check if you can play the video and if it shows up in your history in your logged in account.</p>
+        <div class="mt-8 flex justify-center">
+            <iframe class="border-8 rounded" width="560" height="315" src="https://www.youtube.com/embed/aqz-KE-bpKQ?si=CuSLBTjNMf9NA1eg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <footer class="text-center m-4">
+            <a href="https://www.youtube.com/feed/history" target="_blank" rel="noopenner" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300">
+                Check your YouTube history
+            </a>
+        </footer>
+    <%- include(commonPath + '/internal-page/footer.ejs') %>
 
 <%- include(commonPath + '/footer.ejs') %>
