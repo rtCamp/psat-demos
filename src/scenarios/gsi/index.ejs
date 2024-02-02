@@ -1,14 +1,13 @@
 <%- include(commonPath + '/header.ejs') %>
 
-<div class="container mx-auto py-8">
-    <h1 class="text-3xl font-bold mb-4 text-center">Legacy Google Sign-in</h1>
+<%- include(commonPath + '/internal-page/header.ejs') %>
     <p class="text-lg font-bold mb-4 text-center">Please login to test this demo.</p>
     <div class="flex justify-center">
         <div class="g-signin2" data-onsuccess="onSignIn"></div>
-        <button id="signout-btn" class="hidden ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="signOut()">Sign Out</button>
+        <button id="signout-btn" class="hidden ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded" onclick="signOut()">Sign Out</button>
     </div>
     <div id="status" class="text-center text-lg mt-4"></div>
-</div>
+<%- include(commonPath + '/internal-page/footer.ejs') %>
 
 <script>
     const statusMessage = document.getElementById('status');
