@@ -73,6 +73,7 @@ handle_after_build(){
     remote_execute "$APP_PATH" "ln -sfn $RELEASE_FOLDER_NAME current"
     info "Restarting server"
     remote_execute "$REMOTE_PATH" 'docker compose restart server'
+    remote_execute "$REMOTE_PATH" 'docker compose up -d'
 }
 
 retain_releases(){
