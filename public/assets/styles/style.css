@@ -795,8 +795,16 @@ video {
   width: 6rem;
 }
 
+.w-\[30rem\] {
+  width: 30rem;
+}
+
 .w-\[60rem\] {
   width: 60rem;
+}
+
+.w-\[90rem\] {
+  width: 90rem;
 }
 
 .w-full {
@@ -960,6 +968,11 @@ video {
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 
 .py-2 {
