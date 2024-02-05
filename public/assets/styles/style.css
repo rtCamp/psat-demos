@@ -710,8 +710,16 @@ video {
   width: 6rem;
 }
 
+.w-\[30rem\] {
+  width: 30rem;
+}
+
 .w-\[60rem\] {
   width: 60rem;
+}
+
+.w-\[90rem\] {
+  width: 90rem;
 }
 
 .w-full {
