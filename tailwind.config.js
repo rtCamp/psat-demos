@@ -16,5 +16,8 @@ module.exports = {
     'bg-green-100',
     'bg-blue-100',
     'bg-red-100',
+    'w-[30rem]',
+    'w-[60rem]',
+    'w-[90rem]',
   ],
 }
