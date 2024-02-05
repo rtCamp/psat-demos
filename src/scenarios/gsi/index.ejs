@@ -14,7 +14,6 @@
     const googleSignInBtn = document.querySelector('.g-signin2');
 
     function onSignIn(googleUser) {
-        console.log('User signed in', googleUser);
         signoutBtn.classList.remove('hidden');
         googleSignInBtn.classList.add('hidden');
         const profile = googleUser.getBasicProfile();
