@@ -3,10 +3,14 @@ const path = require('path');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    // Send the default page
-    const currentDomain = req.get('host');
     res.render(path.join(__dirname,'index'), {
-        title: 'Social Media'
+        title: 'Personalization with localStorage'
+    });
+});
+
+router.get('/theme-selection', (req, res) => {
+    res.render(path.join(__dirname,'theme-selection'), {
+        title: 'Personalization'
     });
 });
 
