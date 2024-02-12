@@ -1,8 +1,6 @@
 <%- include(commonPath + '/header.ejs') %>
     <div id="theme-container">
-    <%- include(commonPath + '/internal-page/header.ejs') %>
-        <p class="text-lg mb-4 text-center">Here you can set you prefered theme.</p>
-
+    <%- include(commonPath + '/internal-page/header.ejs', {containerType: 'sm'}) %>
         <div class="dark-mode-toggle">
             <input type="checkbox" id="dark-mode-switch" onclick="toggleTheme()" />
             <label for="dark-mode-switch">
