@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     res.render(path.join(__dirname,'index'), {
-        title: 'User Preferences'
+        title: 'Personalization'
     });
 });
 
