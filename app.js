@@ -68,6 +68,7 @@ const scenarios = [
 	'embedded-video',
 	'payment-gateway',
 	'personalization',
+	'personalization-localstorage',
 	'gsi',
 	'social-media'
 ];
