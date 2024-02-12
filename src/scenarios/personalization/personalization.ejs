@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const baseURL = '<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/user-preferences';
+    const baseURL = '<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/personalization';
     const pageContainer = document.getElementById('theme-container');
     const themeSwitcher = document.getElementById('dark-mode-switch');
     
     function updateUserPreference() {
-        fetch(`${baseURL}/get-user-preference`)
+        fetch(`${baseURL}/get-personalization`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function toggleTheme() {
-        fetch( `${baseURL}/set-user-preference`, {
+        fetch( `${baseURL}/set-personalization`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },

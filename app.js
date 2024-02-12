@@ -67,8 +67,9 @@ const scenarios = [
 	'analytics',
 	'embedded-video',
 	'payment-gateway',
-	'user-preferences',
-	'gsi'
+	'personalization',
+	'gsi',
+	'social-media'
 ];
 scenarios.forEach(scenario => {
 	const scenarioRoutes = require(`./src/scenarios/${scenario}/routes`);
