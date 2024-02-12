@@ -8,12 +8,12 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get( '/get-user-preference', ( req, res ) => {
+router.get( '/get-personalization', ( req, res ) => {
     const currentTheme = req.cookies.theme || 'light';
     res.json( { theme: currentTheme });
 });
 
-router.post( '/set-user-preference', ( req, res ) => {
+router.post( '/set-personalization', ( req, res ) => {
     const { theme } = req.body;
     
     if (!theme) {
@@ -31,10 +31,10 @@ router.post( '/set-user-preference', ( req, res ) => {
     res.status(200).send({ message: 'Success', theme : theme});
 });
 
-// Serve the user-preference.js file to the site
-router.get('/user-preference.js', (req, res) => {
+// Serve the personalization.js file to the site
+router.get('/personalization.js', (req, res) => {
     res.set('Content-Type', 'application/javascript');
-    res.render(path.join(__dirname,'user-preference'));
+    res.render(path.join(__dirname,'personalization'));
 });
 
 module.exports = router;

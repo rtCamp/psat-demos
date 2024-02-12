@@ -67,7 +67,7 @@ const scenarios = [
 	'analytics',
 	'embedded-video',
 	'payment-gateway',
-	'user-preferences',
+	'personalization',
 	'gsi'
 ];
 scenarios.forEach(scenario => {
