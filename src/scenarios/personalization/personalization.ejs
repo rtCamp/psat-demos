@@ -4,7 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeSwitcher = document.getElementById('dark-mode-switch');
     
     function updateUserPreference() {
-        fetch(`${baseURL}/get-personalization`)
+        fetch(`${baseURL}/get-personalization`, {
+            method: 'GET',
+            credentials: 'include'
+        })
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
