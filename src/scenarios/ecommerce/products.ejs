@@ -1,13 +1,27 @@
 <%- include(commonPath + '/header.ejs') %>
 
-<div class="container mx-auto py-8 relative">
-    <a href="./cart" id="cart-icon" class="text-blue-600 text-xl hover:underline absolute top-8 right-8">🛒 Cart (0)</a>
-    <h1 class="text-3xl font-bold mb-4 text-center">Products</h1>
+<% 
+	const productList = {
+		1: { name: '🍍 Pineapple'},
+		2: { name: '🍊 Orange' },
+		3: { name: '🍓 Strawberry' }
+	};
+
+	const getProductName = ( productId ) => {
+		return productList[productId].name 
+	} 
+%>
+
+<div class="container mx-auto p-8 relative">
+    <header class="flex justify-between items-center mb-6">
+		<h1 class="text-3xl font-bold text-center">Products</h1>
+		<a href="./cart" id="cart-icon" class="text-blue-600 text-xl hover:underline">🛒 Cart (0)</a>
+    </header>	
     <div id="error-message" class="text-center text-red-600 mb-4"></div>
     <ul class="space-y-4">
 		<% [1,2,3].forEach(productNumber => { %>
-			<li class="text-center">
-				<span>Product <%= productNumber %></span>
+			<li class="text-center flex justify-between items-center p-2 bg-white rounded shadow text-lg">
+				<span><%= getProductName(productNumber) %></span>
 				<button onclick="addToCart('<%= productNumber %>')" class="ml-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300">Add to cart</button>
 			</li>
 		<% }) %>

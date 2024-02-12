@@ -1,7 +1,7 @@
 <%- include(commonPath + '/header.ejs') %>
 
     <%- include(commonPath + '/internal-page/header.ejs') %>
-        <p class="bg-gray-100 p-4 rounded-lg mb-4 text-lg">Item: <%= item %> - $<%= price %></p>
+        <p class="bg-gray-100 p-4 rounded-lg mb-4 text-lg">Shopping cart: <%= item %> - $<%= price %></p>
         <div class="overflow-hidden rounded-lg">
             <iframe src="<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/payment-gateway/payment-form" class="w-full h-96" frameborder="0"></iframe>
         </div>
