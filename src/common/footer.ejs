@@ -1,14 +1,8 @@
 
-    <footer class="main-footer mt-auto text-center p-2 text-xs bg-white rounded-lg m-4 container-lg">
-        This project is part of the Privacy Sandbox Analysis Tool. To learn more, visit our <a href="https://github.com/GoogleChromeLabs/ps-analysis-tool/wiki" class="text-blue-600 hover:underline" target="_blank" rel="noopener">Wiki Page</a>.
+    <footer class="flex gap-4 main-footer mt-auto p-8 text-xs bg-white">
+        <a href="https://github.com/GoogleChromeLabs/ps-analysis-tool/wiki" class="text-600 font-bold hover:underline" target="_blank" rel="noopener">Documentation</a>
+        <a href="https://chromewebstore.google.com/detail/privacy-sandbox-analysis/ehbnpceebmgpanbbfckhoefhdibijkef" class="text-600 font-bold hover:underline" target="_blank" rel="noopener">Download the PSAT extension</a>
+        <a href="https://privacysandbox.com/" class="text-600 font-bold hover:underline" target="_blank" rel="noopener">About Privacy Sandbox</a>
     </footer>
-    <script>
-        const mainFooter = document.querySelector('.main-footer');
-        const isIframe = window.self !== window.top;
-        
-        if (mainFooter && isIframe) {
-           mainFooter.remove(); 
-        }
-    </script>
 </body>
 </html>

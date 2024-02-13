@@ -1,11 +1,10 @@
 <%- include(commonPath + '/header.ejs') %>
 
-<div class="container mx-auto py-8">
-	<h1 class="text-3xl font-bold mb-4 text-center">E-Commerce</h1>
-	<p class="text-lg font-bold mb-4 text-center">Here is an embedded Third-Party e-commerce site, check if you can add products to cart.</p>
+	<header>
+		<h1 class="text-3xl font-bold my-8 text-center text-slate-800">E-commerce</h1>
+	</header>
 	<div class="mt-8 flex justify-center">
 		<iframe src="<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/ecommerce/products" class="border-8 rounded w-1/2 h-96"></iframe>
 	</div>
-</div>
 
 <%- include(commonPath + '/footer.ejs') %>

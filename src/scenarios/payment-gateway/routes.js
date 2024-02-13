@@ -2,11 +2,13 @@ const express = require( 'express' );
 const path = require( 'path' );
 const router = express.Router();
 
+const DEMO_CARD_NUMBER = '4242424242424242';
+const DEMO_CARD_NUMBER_2 = '4242-4242-4242-4242';
 
 router.get( '/', ( req, res ) => {
 	res.render( path.join( __dirname, 'checkout' ), {
-		title: 'Payment Gateway',
-		item: "Virtual Badge for testing the site",
+		title: 'Checkout - Payment',
+		item: '🍍 Pineapple',
 		price: 10,
 	} );
 } );
@@ -18,7 +20,7 @@ router.get( '/payment-form', ( req, res ) => {
 			maxAge: 900000,
 			httpOnly: true,
 			domain: res.locals.domainC,
-			sameSite: "none",
+			sameSite: 'none',
 			secure: true
 		} );
 	}
@@ -33,13 +35,13 @@ router.post( '/payment-form', ( req, res ) => {
 	let message = '';
 	let status = 0;
 
-	if (sessionId && ( cardNumber === '4242424242424242' || cardNumber === '4242-4242-4242-4242' )) {
+	if (sessionId && ( cardNumber === DEMO_CARD_NUMBER || cardNumber === DEMO_CARD_NUMBER_2 )) {
 		status = 1;
 		message = 'Payment successful!';
 	} else if (!sessionId) {
 		message = 'Payment failed! Session not valid.';
 	} else {
-		message = 'Invalid card number. <br/>Please use 4242424242424242 for demo purchases.';
+		message = `Invalid card number. <br/>Please use ${DEMO_CARD_NUMBER} for demo purchases.`;
 	}
 
 	res.render( path.join( __dirname, 'payment-form' ), {

@@ -1,0 +1,33 @@
+<%- include(commonPath + '/header.ejs') %>
+
+<%- include(commonPath + '/internal-page/header.ejs', {containerType: 'sm'}) %>
+    <div id="status" class="text-center font-bold text-lg my-4"></div>
+    <div class="flex justify-center">
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <button id="signout-btn" class="hidden ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded" onclick="signOut()">Sign Out</button>
+    </div>
+<%- include(commonPath + '/internal-page/footer.ejs') %>
+
+<script>
+    const statusMessage = document.getElementById('status');
+    const signoutBtn = document.getElementById('signout-btn');
+    const googleSignInBtn = document.querySelector('.g-signin2');
+
+    function onSignIn(googleUser) {
+        signoutBtn.classList.remove('hidden');
+        googleSignInBtn.classList.add('hidden');
+        const profile = googleUser.getBasicProfile();
+        statusMessage.textContent = 'Hello ' + profile.getName() + '!';
+    }
+
+    function signOut() {
+        const auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(() => {
+            statusMessage.textContent = '';
+            signoutBtn.classList.add('hidden');
+            googleSignInBtn.classList.remove('hidden');
+        });
+    }
+</script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<%- include(commonPath + '/footer.ejs') %>

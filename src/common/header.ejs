@@ -7,18 +7,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="google-signin-client_id" content="<%= googleClientId %>">
 
     <link rel="stylesheet" href="/assets/styles/style.css">
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const mainHeader = document.querySelector('.main-header');
-            const isIframe = window.self !== window.top;
-
-            if (mainHeader && isIframe) {
-                mainHeader.remove(); 
-            }
-        });
-    </script>
+    <script src="/assets/js/main.js"></script>
 </head>
 <body class="<%= backgroundColor %> flex flex-col min-h-screen">
     <header class="main-header last:fixed w-full bg-white z-50 shadow-md">

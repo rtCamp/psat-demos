@@ -1,0 +1,7 @@
+<%- include(commonPath + '/header.ejs') %>
+    <div id="theme-container">
+        <%- include(commonPath + '/internal-page/header.ejs') %>
+            <iframe src="<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/personalization-localstorage/theme-selection" class="border-8 rounded w-full h-96 overflow-hidden"></iframe>
+        <%- include(commonPath + '/internal-page/footer.ejs') %>
+    </div>
+<%- include(commonPath + '/footer.ejs') %>

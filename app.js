@@ -33,6 +33,7 @@ app.use((req, res, next) => {
 	res.locals.domainA = process.env['domain-a'];
 	res.locals.domainB = process.env['domain-b'];
 	res.locals.domainC = process.env['domain-c'];
+	res.locals.googleClientId = process.env['google-client-id'];
 	res.locals.port = process.env.port;
 	res.locals.isPortPresent = req.get('host').includes(':');
 	res.locals.currentDomain = req.get( 'host' );
@@ -66,6 +67,10 @@ const scenarios = [
 	'analytics',
 	'embedded-video',
 	'payment-gateway',
+	'personalization',
+	'personalization-localstorage',
+	'gsi',
+	'social-media'
 ];
 scenarios.forEach(scenario => {
 	const scenarioRoutes = require(`./src/scenarios/${scenario}/routes`);

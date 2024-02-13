@@ -1,0 +1,25 @@
+<%- include(commonPath + '/header.ejs') %>
+
+    <%- include(commonPath + '/internal-page/header.ejs', {containerType: 'sm'}) %>
+        <div id="fb-root"></div>
+        <script
+            async
+            defer
+            crossorigin="anonymous"
+            src="https://connect.facebook.net/en_EN/sdk.js#xfbml=1&version=v19.0&appId=222635294526394"
+            nonce="T4XgOzUp"
+        ></script>
+        <div id="status" class="text-center font-bold text-lg my-4"></div>
+        <div class="flex justify-center">
+            <div
+                class="fb-like"
+                data-href="<%= currentDomain %>"
+                data-width=""
+                data-layout=""
+                data-action=""
+                data-size=""
+                data-share="true"
+            ></div>
+        </div>
+    <%- include(commonPath + '/internal-page/footer.ejs') %>
+<%- include(commonPath + '/footer.ejs') %>
