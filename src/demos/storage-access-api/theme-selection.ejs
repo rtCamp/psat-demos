@@ -1,7 +1,7 @@
 <%- include(commonPath + '/header.ejs') %>
     <div id="theme-container" class="flex items-center justify-center">
     <%- include(commonPath + '/internal-page/header.ejs', {containerType: 'sm'}) %>
-        <div class="text-red-500 p-4" id="status-message"></div>
+        <div class="text-red-500 p-4 text-sm" id="status-message"></div>
         <div class="dark-mode-toggle">
             <input type="checkbox" id="dark-mode-switch" onclick="toggleTheme()" />
             <label for="dark-mode-switch">
