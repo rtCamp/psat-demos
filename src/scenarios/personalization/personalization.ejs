@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(data => {
                 const theme = data.theme;
-                console.log(data.theme)
                 pageContainer.className = theme;
                 themeSwitcher.checked = theme === 'dark';
             })
