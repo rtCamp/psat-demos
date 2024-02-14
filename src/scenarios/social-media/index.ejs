@@ -2,24 +2,29 @@
 
     <%- include(commonPath + '/internal-page/header.ejs', {containerType: 'sm'}) %>
         <div id="fb-root"></div>
-        <script
-            async
-            defer
-            crossorigin="anonymous"
-            src="https://connect.facebook.net/en_EN/sdk.js#xfbml=1&version=v19.0&appId=222635294526394"
-            nonce="T4XgOzUp"
-        ></script>
-        <div id="status" class="text-center font-bold text-lg my-4"></div>
-        <div class="flex justify-center">
-            <div
-                class="fb-like"
-                data-href="<%= currentDomain %>"
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0&appId=<%= facebookAppId %>" nonce="GKOY1kp9"></script>
+
+        <div id="status" class="text-center font-bold text-lg mb-4"></div>
+        <div class="mb-6">
+            <h2 class="block text-xl font-bold text-center mb-4">Like Button</h2>
+            <!-- Your like button code -->
+            <div class="fb-like" 
+                data-href="<%= currentDomain %>" 
                 data-width=""
-                data-layout=""
-                data-action=""
-                data-size=""
-                data-share="true"
-            ></div>
+                data-layout="button_count" 
+                data-action="like" 
+                data-size="large"  
+                data-share="false">
+            </div>
+        </div>
+        
+        <div class="mb-6"> 
+            <h2 class="block text-xl font-bold text-center mb-4">Share Button</h2>
+            <div class="fb-share-button" data-href="<%= currentDomain %>" data-layout="button" data-size="large"></div>
+        </div>
+        <div class="mb-6">
+            <h2 class="text-xl font-bold text-center mb-4">Comments</h2>
+            <div class="fb-comments" data-href="<%= currentDomain %>" data-width="" data-numposts="5"></div>
         </div>
     <%- include(commonPath + '/internal-page/footer.ejs') %>
 <%- include(commonPath + '/footer.ejs') %>
