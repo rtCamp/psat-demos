@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const baseURL = '<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/personalization';
     const pageContainer = document.getElementById('theme-container');
     const themeSwitcher = document.getElementById('dark-mode-switch');
-    
+    const statusMessage = document.getElementById('status-message');
+
     function updateUserPreference() {
         fetch(`${baseURL}/get-personalization`, {
             method: 'GET',
@@ -16,11 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(data => {
                 const theme = data.theme;
-                pageContainer.className = theme;
-                themeSwitcher.checked = theme === 'dark';
+                if ( theme === 'dark' ) {
+                    pageContainer.classList.add('dark');
+                    themeSwitcher.checked = true;
+                }        
             })
             .catch(error => {
                 console.error('There has been a problem with your fetch operation:', error);
+                statusMessage.textContent = `There was an error fetching your personalization settings: ${error.message}`;
             }); 
     }
 
@@ -31,9 +35,17 @@ document.addEventListener('DOMContentLoaded', () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ theme: themeSwitcher?.checked ? 'dark' : 'light' })
         })
-        .then(response => response.json())
+        .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
         .then(data => {
-            pageContainer.className = data.theme;
+            pageContainer.classList.toggle('dark');
+        }).catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+            statusMessage.textContent = `There was an error updating your personalization settings: ${error.message}`;
         });
     }
     window.toggleTheme = toggleTheme;
