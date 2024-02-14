@@ -4,8 +4,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (isIframe) {
         const mainHeader = document.querySelector('.main-header');
         const mainFooter = document.querySelector('.main-footer');
+        const internalPageHeader = document.querySelector('.internal-page-header');
 
         mainHeader?.remove(); 
-        mainFooter?.remove(); 
+        mainFooter?.remove();
+        internalPageHeader?.remove('hidden');
     }
 });
