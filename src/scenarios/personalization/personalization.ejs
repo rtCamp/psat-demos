@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return response.json();
             })
         .then(data => {
-            pageContainer.classList.toggle('dark');
+            pageContainer.className = data.theme;
         }).catch(error => {
             console.error('There has been a problem with your fetch operation:', error);
             statusMessage.textContent = `There was an error updating your personalization settings: ${error.message}`;
