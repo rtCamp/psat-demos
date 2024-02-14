@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const baseURL = '<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/personalization';
     const pageContainer = document.getElementById('theme-container');
     const themeSwitcher = document.getElementById('dark-mode-switch');
+    const errorMessages = document.getElementById('status-message');
     
     async function updateUserPreference() {
 
@@ -15,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetchAndApplyTheme();
             } catch (error) {
                 console.error('There has been a problem with your fetch operation:', error);
+                errorMessages.textContent = `Error: ${error}`;
             }
         }   
     }
@@ -27,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
+                        errorMessages.textContent = `Network response was not ok ${response.status} - ${response.statusText}`;
                     }
                     return response.json();
                 })
@@ -39,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
                 .catch(error => {
                     console.error('There has been a problem with your fetch operation:', error);
+                    errorMessages.textContent = `Error: ${error}`;
                 });
     }
 
@@ -57,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function toggleTheme() {
         const hasStorageAccess = await document.hasStorageAccess();
-        if( await document.hasStorageAccess() ) {
+        if( hasStorageAccess ) {
             fetchSetPersonalization();
         } else {
             try {
@@ -66,9 +70,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     fetchSetPersonalization();
                 } else {
                     console.error('User denied storage access');
+                    errorMessages.textContent = 'User denied storage access';
                 }
             } catch (error) {
-                console.error('There has been a problem with your fetch operation:', error);
+                console.error('Error:', error);
+                console.log(error)
+                errorMessages.textContent = `${error}`;
             }
         } 
     }
