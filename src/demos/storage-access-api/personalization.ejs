@@ -3,16 +3,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const pageContainer = document.getElementById('theme-container');
     const themeSwitcher = document.getElementById('dark-mode-switch');
     const errorMessages = document.getElementById('status-message');
+    const loadButton    = document.getElementById('load-button');
+    const toggleContainer = document.querySelector('.dark-mode-toggle');
+    const isIframe = window.self !== window.top;
+    const containerClass = isIframe ? 'h-screen flex items-center justify-center' : 'flex items-center justify-center';
+    let hasStorageAccess = false;
     
-    async function updateUserPreference() {
+    document.hasStorageAccess().then(result => {
+        hasStorageAccess = result;
+        if ( hasStorageAccess ) {
+            updateUserPreference();
+        }
+    })
 
-        const hasStorageAccess = await document.hasStorageAccess();
-        
+    async function updateUserPreference() {
+        console.log('hasStorageAccess', hasStorageAccess);
         if ( hasStorageAccess ) {
             fetchAndApplyTheme();
         } else {
             try {
                 await document.requestStorageAccess();
+                toggleContainer.classList.remove('hidden');
+                loadButton.classList.add('hidden');
                 fetchAndApplyTheme();
             } catch (error) {
                 console.error('There has been a problem with your fetch operation:', error);
@@ -35,14 +47,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
                 .then(data => {
                     const theme = data.theme;
+                    pageContainer.className = `${containerClass} ${data.theme}`
+                    console.log('theme', theme);
                     if (theme === 'dark') {
-                        pageContainer.classList.add('dark');
                         themeSwitcher.checked = true;
                     }
                 })
                 .catch(error => {
                     console.error('There has been a problem with your fetch operation:', error);
-                    errorMessages.textContent = `Error: ${error}`;
+                    errorMessages.textContent = `Error: ${error.message}`;
                 });
     }
 
@@ -55,12 +68,13 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(response => response.json())
         .then(data => {
-            pageContainer.classList.toggle('dark');
+            pageContainer.className = `${containerClass} ${data.theme}`;
         });
     }
 
     async function toggleTheme() {
-        const hasStorageAccess = await document.hasStorageAccess();
+        hasStorageAccess = await document.hasStorageAccess();
+        
         if( hasStorageAccess ) {
             fetchSetPersonalization();
         } else {
@@ -74,12 +88,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } catch (error) {
                 console.error('Error:', error);
-                console.log(error)
-                errorMessages.textContent = `${error}`;
+                errorMessages.textContent = `The request to storage access API was denied because the user never interacted with the top-level site context or the permission wasn't grant by the user`;
             }
         } 
     }
     
     window.toggleTheme = toggleTheme;
-    // updateUserPreference();
+    if (isIframe && !hasStorageAccess) {
+        console.log('In iframe');
+        toggleContainer.classList.add('hidden');
+        loadButton.classList.remove('hidden');
+        loadButton.addEventListener('click', updateUserPreference);
+    }
 });
