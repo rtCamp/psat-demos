@@ -54,7 +54,7 @@ app.use((req, res, next) => {
 });
 
 // Mount routes for different demo types
-const demoTypes = ['chips', 'related-websites-sets', 'private-state-tokens', 'fedcm'];
+const demoTypes = ['chips', 'related-websites-sets', 'private-state-tokens', 'fedcm', 'storage-access-api'];
 demoTypes.forEach(demoType => {
 	const demoRoutes = require(`./src/demos/${demoType}/routes`);
 	app.use(`/${demoType}`, demoRoutes);  // Mount the routes on a path specific to the demo type
