@@ -1,0 +1,76 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const baseURL = '<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/personalization';
+    const pageContainer = document.getElementById('theme-container');
+    const themeSwitcher = document.getElementById('dark-mode-switch');
+    
+    async function updateUserPreference() {
+
+        const hasStorageAccess = await document.hasStorageAccess();
+        
+        if ( hasStorageAccess ) {
+            fetchAndApplyTheme();
+        } else {
+            try {
+                await document.requestStorageAccess();
+                fetchAndApplyTheme();
+            } catch (error) {
+                console.error('There has been a problem with your fetch operation:', error);
+            }
+        }   
+    }
+
+    function fetchAndApplyTheme() {
+        fetch(`${baseURL}/get-personalization`, {
+                method: 'GET',
+                credentials: 'include'
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const theme = data.theme;
+                    pageContainer.className = theme;
+                    themeSwitcher.checked = theme === 'dark';
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
+    }
+
+    function fetchSetPersonalization() {
+        fetch( `${baseURL}/set-personalization`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ theme: themeSwitcher?.checked ? 'dark' : 'light' })
+        })
+        .then(response => response.json())
+        .then(data => {
+            pageContainer.className = data.theme;
+        });
+    }
+
+    async function toggleTheme() {
+        const hasStorageAccess = await document.hasStorageAccess();
+        if( await document.hasStorageAccess() ) {
+            fetchSetPersonalization();
+        } else {
+            try {
+                await document.requestStorageAccess();
+                if ( await document.hasStorageAccess() ) {
+                    fetchSetPersonalization();
+                } else {
+                    console.error('User denied storage access');
+                }
+            } catch (error) {
+                console.error('There has been a problem with your fetch operation:', error);
+            }
+        } 
+    }
+    
+    window.toggleTheme = toggleTheme;
+    // updateUserPreference();
+});
