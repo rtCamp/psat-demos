@@ -71,7 +71,8 @@ const scenarios = [
 	'personalization',
 	'personalization-localstorage',
 	'gsi',
-	'social-media'
+	'social-media',
+	'social-media-comments'
 ];
 scenarios.forEach(scenario => {
 	const scenarioRoutes = require(`./src/scenarios/${scenario}/routes`);
