@@ -14,7 +14,7 @@ router.use((req, res, next) => {
 router.get('/', (req, res) => {
 	// Render the index view (homepage)
 	res.render(path.join(__dirname,'index'), {
-        title: 'E-commerce'
+        title: 'Shopping Cart'
     });
 });
 
