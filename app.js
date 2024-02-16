@@ -34,6 +34,7 @@ app.use((req, res, next) => {
 	res.locals.domainB = process.env['domain-b'];
 	res.locals.domainC = process.env['domain-c'];
 	res.locals.googleClientId = process.env['google-client-id'];
+	res.locals.facebookAppId = process.env['facebook-app-id'];
 	res.locals.port = process.env.port;
 	res.locals.isPortPresent = req.get('host').includes(':');
 	res.locals.currentDomain = req.get( 'host' );
@@ -54,7 +55,7 @@ app.use((req, res, next) => {
 });
 
 // Mount routes for different demo types
-const demoTypes = ['chips', 'related-websites-sets', 'private-state-tokens', 'fedcm'];
+const demoTypes = ['chips', 'related-websites-sets', 'private-state-tokens', 'fedcm', 'storage-access-api'];
 demoTypes.forEach(demoType => {
 	const demoRoutes = require(`./src/demos/${demoType}/routes`);
 	app.use(`/${demoType}`, demoRoutes);  // Mount the routes on a path specific to the demo type
@@ -70,7 +71,8 @@ const scenarios = [
 	'personalization',
 	'personalization-localstorage',
 	'gsi',
-	'social-media'
+	'social-media',
+	'social-media-comments'
 ];
 scenarios.forEach(scenario => {
 	const scenarioRoutes = require(`./src/scenarios/${scenario}/routes`);

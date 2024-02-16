@@ -1,0 +1,103 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const baseURL = '<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/personalization';
+    const pageContainer = document.getElementById('theme-container');
+    const themeSwitcher = document.getElementById('dark-mode-switch');
+    const errorMessages = document.getElementById('status-message');
+    const loadButton    = document.getElementById('load-button');
+    const toggleContainer = document.querySelector('.dark-mode-toggle');
+    const isIframe = window.self !== window.top;
+    const containerClass = isIframe ? 'h-screen flex items-center justify-center' : 'flex items-center justify-center';
+    let hasStorageAccess = false;
+    
+    document.hasStorageAccess().then(result => {
+        hasStorageAccess = result;
+        if ( hasStorageAccess ) {
+            updateUserPreference();
+        }
+    })
+
+    async function updateUserPreference() {
+        console.log('hasStorageAccess', hasStorageAccess);
+        if ( hasStorageAccess ) {
+            fetchAndApplyTheme();
+        } else {
+            try {
+                await document.requestStorageAccess();
+                toggleContainer.classList.remove('hidden');
+                loadButton.classList.add('hidden');
+                fetchAndApplyTheme();
+            } catch (error) {
+                console.error('There has been a problem with your fetch operation:', error);
+                errorMessages.textContent = `Error: ${error}`;
+            }
+        }   
+    }
+
+    function fetchAndApplyTheme() {
+        fetch(`${baseURL}/get-personalization`, {
+                method: 'GET',
+                credentials: 'include'
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                        errorMessages.textContent = `Network response was not ok ${response.status} - ${response.statusText}`;
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const theme = data.theme;
+                    pageContainer.className = `${containerClass} ${data.theme}`
+                    console.log('theme', theme);
+                    if (theme === 'dark') {
+                        themeSwitcher.checked = true;
+                    }
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                    errorMessages.textContent = `Error: ${error.message}`;
+                });
+    }
+
+    function fetchSetPersonalization() {
+        fetch( `${baseURL}/set-personalization`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ theme: themeSwitcher?.checked ? 'dark' : 'light' })
+        })
+        .then(response => response.json())
+        .then(data => {
+            pageContainer.className = `${containerClass} ${data.theme}`;
+        });
+    }
+
+    async function toggleTheme() {
+        hasStorageAccess = await document.hasStorageAccess();
+        
+        if( hasStorageAccess ) {
+            fetchSetPersonalization();
+        } else {
+            try {
+                await document.requestStorageAccess();
+                if ( await document.hasStorageAccess() ) {
+                    fetchSetPersonalization();
+                } else {
+                    console.error('User denied storage access');
+                    errorMessages.textContent = 'User denied storage access';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                errorMessages.textContent = `The request to storage access API was denied because the user never interacted with the top-level site context or the permission wasn't grant by the user`;
+            }
+        } 
+    }
+    
+    window.toggleTheme = toggleTheme;
+    if (isIframe && !hasStorageAccess) {
+        console.log('In iframe');
+        toggleContainer.classList.add('hidden');
+        loadButton.classList.remove('hidden');
+        loadButton.addEventListener('click', updateUserPreference);
+    }
+});

@@ -2,6 +2,7 @@
     <div id="theme-container">
     <%- include(commonPath + '/internal-page/header.ejs', {containerType: 'sm'}) %>
         <div class="dark-mode-toggle">
+            <div class="text-red-500 p-4 text-sm" id="status-message"></div>
             <input type="checkbox" id="dark-mode-switch" onclick="toggleTheme()" />
             <label for="dark-mode-switch">
                 <span class="bullet">
