@@ -6,7 +6,6 @@
 
         <div id="status" class="text-center font-bold text-lg mb-4"></div>
         <div class="mb-6">
-            <h2 class="block text-xl font-bold text-center mb-4">Like Button</h2>
             <!-- Your like button code -->
             <div class="fb-like" 
                 data-href="<%= currentDomain %>" 
@@ -16,15 +15,6 @@
                 data-size="large"  
                 data-share="false">
             </div>
-        </div>
-        
-        <div class="mb-6"> 
-            <h2 class="block text-xl font-bold text-center mb-4">Share Button</h2>
-            <div class="fb-share-button" data-href="<%= currentDomain %>" data-layout="button" data-size="large"></div>
-        </div>
-        <div class="mb-6">
-            <h2 class="text-xl font-bold text-center mb-4">Comments</h2>
-            <div class="fb-comments" data-href="<%= currentDomain %>" data-width="" data-numposts="5"></div>
         </div>
     <%- include(commonPath + '/internal-page/footer.ejs') %>
 <%- include(commonPath + '/footer.ejs') %>
