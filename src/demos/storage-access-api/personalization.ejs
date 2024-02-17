@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     async function updateUserPreference() {
-        console.log('hasStorageAccess', hasStorageAccess);
         if ( hasStorageAccess ) {
             fetchAndApplyTheme();
         } else {
@@ -27,8 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 loadButton.classList.add('hidden');
                 fetchAndApplyTheme();
             } catch (error) {
-                console.error('There has been a problem with your fetch operation:', error);
-                errorMessages.textContent = `Error: ${error}`;
+                errorMessages.textContent = error?.message;
             }
         }   
     }
@@ -48,14 +46,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(data => {
                     const theme = data.theme;
                     pageContainer.className = `${containerClass} ${data.theme}`
-                    console.log('theme', theme);
                     if (theme === 'dark') {
                         themeSwitcher.checked = true;
                     }
                 })
                 .catch(error => {
-                    console.error('There has been a problem with your fetch operation:', error);
-                    errorMessages.textContent = `Error: ${error.message}`;
+                    errorMessages.textContent = error?.message;
                 });
     }
 
@@ -83,11 +79,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if ( await document.hasStorageAccess() ) {
                     fetchSetPersonalization();
                 } else {
-                    console.error('User denied storage access');
                     errorMessages.textContent = 'User denied storage access';
                 }
             } catch (error) {
-                console.error('Error:', error);
                 errorMessages.textContent = `The request to storage access API was denied because the user never interacted with the top-level site context or the permission wasn't grant by the user`;
             }
         } 
@@ -95,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     window.toggleTheme = toggleTheme;
     if (isIframe && !hasStorageAccess) {
-        console.log('In iframe');
         toggleContainer.classList.add('hidden');
         loadButton.classList.remove('hidden');
         loadButton.addEventListener('click', updateUserPreference);
