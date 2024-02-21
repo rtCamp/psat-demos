@@ -1,0 +1,20 @@
+<%- include(commonPath + '/header.ejs') %>
+
+    <%- include(commonPath + '/internal-page/header.ejs') %>
+    <h2 class="font-bold mb-1 text-center">Traditional Ad (using iframe):</h2>
+    <div class="aspect-w-16 aspect-h-9">
+        <iframe src="<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/fenced-frames/traditional-ad" class="border-8 rounded overflow-hidden w-full aspect-video mb-8"></iframe>
+    </div>
+    <h2 class="font-bold mb-1 text-center">Privacy-Enhanced Ad (using fencedframe):</h2>
+    <fencedframe width="400" height="400" src="<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/fenced-frames/fenced-ad?width=400&height=400" class="border-8 rounded overflow-hidden mb-8"></fencedframe>
+
+    <script>
+        // Very simplified for demo purposes (error handling, etc. omitted)
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inspect localStorage after both ads have loaded
+            console.log('Items in localStorage:', localStorage);
+        });
+    </script>
+
+    <%- include(commonPath + '/internal-page/footer.ejs') %>
+<%- include(commonPath + '/footer.ejs') %>

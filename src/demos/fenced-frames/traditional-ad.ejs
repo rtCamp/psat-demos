@@ -1,0 +1,10 @@
+<%- include(commonPath + '/header.ejs') %>
+   
+    <img src="/assets/imgs/running_ads.jpeg" alt="Running Shoes" class="mx-auto w-96 h-96 mb-4" >
+     <h2 class="text-center">Check out these great running shoes!</h2>
+    <script>
+        // Simulate potential tracking behavior 
+        localStorage.setItem('viewed_products', 'running_shoes');
+        console.log('Main site cookies can be accessed:', document.cookie);
+    </script>
+<%- include(commonPath + '/footer.ejs') %>
