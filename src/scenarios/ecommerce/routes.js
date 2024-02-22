@@ -6,7 +6,7 @@ const router = express.Router();
 // Middleware to setup common rendering variables
 router.use((req, res, next) => {
 	// Set common variables for rendering views
-	res.locals.title =  'E-Commerce - Privacy Sandbox' // Set the page title
+	res.locals.title =  'Shopping Cart' // Set the page title
 	next();  // Continue to the next middleware or route handler
 });
 
