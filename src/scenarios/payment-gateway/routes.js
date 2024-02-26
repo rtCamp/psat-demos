@@ -19,7 +19,7 @@ router.get( '/payment-form', ( req, res ) => {
 		res.cookie( 'session_id', 'some_random_session_id', {
 			maxAge: 900000,
 			httpOnly: true,
-			domain: res.locals.domainC,
+			domain: `.${res.locals.domainC}`,
 			sameSite: 'none',
 			secure: true
 		} );

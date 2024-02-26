@@ -22,7 +22,7 @@ router.post( '/set-personalization', ( req, res ) => {
     }
     
     res.cookie('theme', theme, {
-        domain: res.locals.domainC,
+        domain: `.${res.locals.domainC}`,
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
         httpOnly: true,
         sameSite: "none",

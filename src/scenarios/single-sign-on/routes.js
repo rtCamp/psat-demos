@@ -46,7 +46,7 @@ router.get('/sign-in', (req, res) => {
 router.post('/validate', (req, res) => {
 	const email = req.body.email;
 	if (email) {
-		res.cookie('email', email, { maxAge: 900000, httpOnly: true, domain: res.locals.domainC, sameSite: "none", secure: true });
+		res.cookie('email', email, { maxAge: 900000, httpOnly: true, domain: `.${res.locals.domainC}`, sameSite: "none", secure: true });
 		res.render(path.join(__dirname, 'postmessage'), { email: email });
 	} else {
 		res.status(400).send('Email validation failed');
