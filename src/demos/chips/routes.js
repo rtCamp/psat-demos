@@ -29,7 +29,7 @@ router.get( '/analytics.js', ( req, res ) => {
 
 		// Store the analytics ID in a cookie
 		res.cookie( 'analyticsId', analyticsId, {
-			Domain: res.locals.domainC,
+			Domain: `.${res.locals.domainC}`,
 			maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
 			httpOnly: true,
 			sameSite: "none",
