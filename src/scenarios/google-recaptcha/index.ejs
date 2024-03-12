@@ -14,15 +14,16 @@
 <script type="text/javascript">
     const statusMessage = document.getElementById('status-message');
     const captchaForm = document.getElementById('captcha-form');
+    const sendButton = captchaForm.querySelector('input[type="submit"]')
 
     const verifyCallback = (response) => {
         console.log(response);
         if (response) {
             statusMessage.textContent = `captcha verified`;
-            captchaForm.querySelector('input[type="submit"]').removeAttribute('disabled');
-            captchaForm.querySelector('input[type="submit"]').classList.remove('cursor-not-allowed');
-            captchaForm.querySelector('input[type="submit"]').classList.remove('bg-gray-100');
-            captchaForm.querySelector('input[type="submit"]').classList.add('bg-blue-500');
+            sendButton.removeAttribute('disabled');
+            sendButton.classList.remove('cursor-not-allowed');
+            sendButton.classList.remove('bg-gray-100');
+            sendButton.classList.add('bg-blue-500');
         }
     };
 
