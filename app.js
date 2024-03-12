@@ -35,6 +35,7 @@ app.use((req, res, next) => {
 	res.locals.domainC = process.env['domain-c'];
 	res.locals.googleClientId = process.env['google-client-id'];
 	res.locals.facebookAppId = process.env['facebook-app-id'];
+	res.locals.recaptchaSiteKey = process.env['recaptcha-site-key'];
 	res.locals.port = process.env.port;
 	res.locals.isPortPresent = req.get('host').includes(':');
 	res.locals.currentDomain = req.get( 'host' );
@@ -74,6 +75,7 @@ const scenarios = [
 	'social-media',
 	'social-media-comments',
 	'disqus-comments',
+	'google-recaptcha',
 ];
 scenarios.forEach(scenario => {
 	const scenarioRoutes = require(`./src/scenarios/${scenario}/routes`);
