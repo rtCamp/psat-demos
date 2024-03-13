@@ -1,96 +1,126 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const baseURL = '<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/personalization';
-    const pageContainer = document.getElementById('theme-container');
-    const themeSwitcher = document.getElementById('dark-mode-switch');
-    const errorMessages = document.getElementById('status-message');
-    const loadButton    = document.getElementById('load-button');
-    const toggleContainer = document.querySelector('.dark-mode-toggle');
-    const isIframe = window.self !== window.top;
-    const containerClass = isIframe ? 'h-screen flex items-center justify-center' : 'flex items-center justify-center';
-    let hasStorageAccess = false;
-    
-    document.hasStorageAccess().then(result => {
-        hasStorageAccess = result;
-        if ( hasStorageAccess ) {
-            updateUserPreference();
-        }
-    })
+(() => {
+  let baseURL,
+    pageContainer,
+    themeSwitcher,
+    errorMessages,
+    loadButton,
+    toggleContainer,
+    isIframe,
+    containerClass,
+    hasStorageAccess;
 
-    async function updateUserPreference() {
-        if ( hasStorageAccess ) {
-            fetchAndApplyTheme();
-        } else {
-            try {
-                await document.requestStorageAccess();
-                toggleContainer.classList.remove('hidden');
-                loadButton.classList.add('hidden');
-                fetchAndApplyTheme();
-            } catch (error) {
-                errorMessages.textContent = error?.message;
-            }
-        }   
+  async function fetchAndApplyTheme() {
+    try {
+      const response = await fetch(`${baseURL}/get-personalization`, {
+        method: 'GET',
+        credentials: 'include',
+    });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+        errorMessages.textContent = `Network response was not ok ${response.status} - ${response.statusText}`;
+      }
+
+      const data = await response.json();
+      pageContainer.className = `${containerClass} ${data.theme}`;
+      if (data.theme === 'dark') {
+        themeSwitcher.checked = true;
+      }
+    } catch (error) {
+      errorMessages.textContent = error?.message;
+    }
+  }
+
+  async function updateUserPreference() {
+    errorMessages.textContent = '';
+    if (hasStorageAccess) {
+      fetchAndApplyTheme();
+      return;
     }
 
-    function fetchAndApplyTheme() {
-        fetch(`${baseURL}/get-personalization`, {
-                method: 'GET',
-                credentials: 'include'
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                        errorMessages.textContent = `Network response was not ok ${response.status} - ${response.statusText}`;
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    const theme = data.theme;
-                    pageContainer.className = `${containerClass} ${data.theme}`
-                    if (theme === 'dark') {
-                        themeSwitcher.checked = true;
-                    }
-                })
-                .catch(error => {
-                    errorMessages.textContent = error?.message;
-                });
+    try {
+      await document.requestStorageAccess();
+      hasStorageAccess = await document.hasStorageAccess();
+
+      if (!hasStorageAccess) {
+        errorMessages.textContent = 'User denied storage access';
+        return;
+      }
+
+      toggleContainer.classList.remove('hidden');
+      loadButton.classList.add('hidden');
+
+      fetchAndApplyTheme();
+    } catch (error) {
+      errorMessages.textContent = error?.message;
+    }
+  }
+
+  async function fetchSetPersonalization() {
+    try {
+      const response = await fetch(`${baseURL}/set-personalization`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          theme: themeSwitcher?.checked ? 'dark' : 'light',
+        }),
+      });
+      const data = await response.json();
+
+      pageContainer.className = `${containerClass} ${data.theme}`;
+    } catch (error) {
+      errorMessages.textContent = error?.message;
+    }
+  }
+
+  async function toggleTheme() {
+    errorMessages.textContent = '';
+
+    if (hasStorageAccess) {
+      fetchSetPersonalization();
+      return;
     }
 
-    function fetchSetPersonalization() {
-        fetch( `${baseURL}/set-personalization`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ theme: themeSwitcher?.checked ? 'dark' : 'light' })
-        })
-        .then(response => response.json())
-        .then(data => {
-            pageContainer.className = `${containerClass} ${data.theme}`;
-        });
+    try {
+      await document.requestStorageAccess();
+      hasStorageAccess = await document.hasStorageAccess();
+
+      if (!hasStorageAccess) {
+        errorMessages.textContent = 'User denied storage access';
+        return;
+      }
+
+      fetchSetPersonalization();
+    } catch (error) {
+      errorMessages.textContent = error?.message;
+    }
+  }
+
+  // Main start point
+  document.addEventListener('DOMContentLoaded', async () => {
+    baseURL =
+      '<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/personalization';
+    pageContainer = document.getElementById('theme-container');
+    themeSwitcher = document.getElementById('dark-mode-switch');
+    errorMessages = document.getElementById('status-message');
+    loadButton = document.getElementById('load-button');
+    toggleContainer = document.querySelector('.dark-mode-toggle');
+    isIframe = window.self !== window.top;
+    containerClass = isIframe
+      ? 'h-screen flex items-center justify-center'
+      : 'flex items-center justify-center';
+    let hasStorageAccess = await document.hasStorageAccess();
+
+    if (hasStorageAccess) {
+      updateUserPreference();
     }
 
-    async function toggleTheme() {
-        hasStorageAccess = await document.hasStorageAccess();
-        
-        if( hasStorageAccess ) {
-            fetchSetPersonalization();
-        } else {
-            try {
-                await document.requestStorageAccess();
-                if ( await document.hasStorageAccess() ) {
-                    fetchSetPersonalization();
-                } else {
-                    errorMessages.textContent = 'User denied storage access';
-                }
-            } catch (error) {
-                errorMessages.textContent = `The request to storage access API was denied because the user never interacted with the top-level site context or the permission wasn't grant by the user`;
-            }
-        } 
-    }
-    
     window.toggleTheme = toggleTheme;
     if (isIframe && !hasStorageAccess) {
-        toggleContainer.classList.add('hidden');
-        loadButton.classList.remove('hidden');
-        loadButton.addEventListener('click', updateUserPreference);
+      toggleContainer.classList.add('hidden');
+      loadButton.classList.remove('hidden');
+      loadButton.addEventListener('click', updateUserPreference);
     }
-});
+  });
+})();
