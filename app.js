@@ -36,6 +36,7 @@ app.use((req, res, next) => {
 	res.locals.googleClientId = process.env['google-client-id'];
 	res.locals.facebookAppId = process.env['facebook-app-id'];
 	res.locals.recaptchaSiteKey = process.env['recaptcha-site-key'];
+	res.locals.turnstileSiteKey = process.env['turnstile-site-key'];
 	res.locals.port = process.env.port;
 	res.locals.isPortPresent = req.get('host').includes(':');
 	res.locals.currentDomain = req.get( 'host' );
@@ -76,6 +77,7 @@ const scenarios = [
 	'social-media-comments',
 	'disqus-comments',
 	'google-recaptcha',
+	'cloudflare-turnstile',
 ];
 scenarios.forEach(scenario => {
 	const scenarioRoutes = require(`./src/scenarios/${scenario}/routes`);
