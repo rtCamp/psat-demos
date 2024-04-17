@@ -74,6 +74,7 @@ const scenarios = [
 	'social-media',
 	'social-media-comments',
 	'disqus-comments',
+	'spotify-embed',
 ];
 scenarios.forEach(scenario => {
 	const scenarioRoutes = require(`./src/scenarios/${scenario}/routes`);
