@@ -5,19 +5,15 @@ const uuid = require( 'uuid' );
 
 router.get('/', (req, res) => {
 	// Send the default page
-	res.render(path.join(__dirname,'index'), {
+	res.render(path.join(__dirname,'analytics-third-party'), {
 		title: 'CHIPS'
 	});
 });
-router.get('/analytics-first-party', (req, res) => {
-	res.render(path.join(__dirname,'analytics-first-party'), {
-		title: 'First Party Cookie Experiments'
-	});
-});
+
 router.get('/analytics-third-party', (req, res) => {
 	// Send the default page
 	res.render(path.join(__dirname,'analytics-third-party'), {
-		title: 'Third Party Cookie Experiments'
+		title: 'CHIPS'
 	});
 });
 // Serve the analytics.js file to the site
@@ -39,16 +35,16 @@ router.get( '/analytics.js', ( req, res ) => {
 
 	}
 
-	let analyticsIdCHIPS = req.cookies['__Host-analyticsId-chips'];
+	let analyticsIdCHIPS = req.cookies['analyticsId-chips'];
 
 	if ( !analyticsIdCHIPS ) {
 		analyticsIdCHIPS = uuid.v4();
 		let expire = 30 * 24 * 60 * 60 * 1000;
-		res.append(
+		/*res.append(
 			'Set-Cookie', '__Host-analyticsId-chips=' + analyticsIdCHIPS + '; Max-Age=' + expire + '; HttpOnly; Secure; Path=/; SameSite=None; Partitioned;'
-		);
+		);*/
 		res.append(
-			'Set-Cookie', 'analyticsId-chips-test=' + analyticsIdCHIPS + ';Domain='+res.locals.domainC+'; Max-Age=' + expire + '; HttpOnly; Secure; Path=/; SameSite=None; Partitioned;'
+			'Set-Cookie', 'analyticsId-chips=' + analyticsIdCHIPS + ';Domain='+res.locals.domainC+'; Max-Age=' + expire + '; HttpOnly; Secure; Path=/; SameSite=None; Partitioned;'
 		);
 	}
 
@@ -73,7 +69,7 @@ router.post( '/track', ( req, res ) => {
 
 router.post( '/trackCHIPS', ( req, res ) => {
 	const {interaction} = req.body;
-	const analyticsIdCHIPS = req.cookies['__Host-analyticsId-chips'];
+	const analyticsIdCHIPS = req.cookies['analyticsId-chips'];
 
 	if ( interaction && analyticsIdCHIPS ) {
 
