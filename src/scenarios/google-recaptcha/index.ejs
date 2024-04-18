@@ -1,13 +1,13 @@
 <%- include(commonPath + '/header.ejs') %>
 
 <%- include(commonPath + '/internal-page/header.ejs', {containerType: 'sm'}) %>
-    <div id="status-message" class="text-center font-bold text-lg my-4"></div>  
+    <div id="status-message" class="text-center font-bold text-lg my-4"></div>
     <form action="?" method="POST" id="captcha-form" class="flex justify-between" >
         <div id="html_element"></div>
-        <input 
-            type="submit" 
-            value="Send" 
-            disabled 
+        <input
+            type="submit"
+            value="Send"
+            disabled
             class="px-4 py-2 bg-gray-100 text-white rounded transition duration-300 cursor-not-allowed" />
     </form>
 <%- include(commonPath + '/internal-page/footer.ejs') %>
@@ -30,14 +30,14 @@
     const errorCallback = (error) => {
         console.log('error');
         if (error) {
-            statusMessage.textContent = `captcha error`;
+            statusMessage.textContent = `reCaptcha error!`;
         }
     };
-    
+
     captchaForm.onsubmit = (event) => {
         event.preventDefault();
         const token = grecaptcha.getResponse();
-        statusMessage.textContent = `form submitted, captcha token ${token}`;
+        statusMessage.textContent = `Form submitted successfully!`;
     }
 
     window.onloadCallback = function() {
