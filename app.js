@@ -71,8 +71,8 @@ const scenarios = [
 	'personalization',
 	'personalization-localstorage',
 	'gsi',
-	'social-media',
-	'social-media-comments',
+	'facebook-like',
+	'facebook-comments',
 	'disqus-comments',
 	'spotify-embed',
 ];
