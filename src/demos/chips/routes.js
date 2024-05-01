@@ -16,6 +16,7 @@ router.get('/analytics-third-party', (req, res) => {
 		title: 'CHIPS'
 	});
 });
+
 // Serve the analytics.js file to the site
 router.get( '/analytics.js', ( req, res ) => {
 	let analyticsId = req.cookies.analyticsId;
@@ -62,7 +63,6 @@ router.post( '/track', ( req, res ) => {
 
 		// Send success status for successful interaction tracking
 		res.status( 200 ).send( analyticsId );
-		//res.sendStatus( 200 );
 	} else {
 		res.status( 400 ).send( 'Invalid request' );
 	}
