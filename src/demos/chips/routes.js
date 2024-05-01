@@ -39,13 +39,14 @@ router.get( '/analytics.js', ( req, res ) => {
 
 	if ( !analyticsIdCHIPS ) {
 		analyticsIdCHIPS = uuid.v4();
-		let expire = 30 * 24 * 60 * 60 * 1000;
-		/*res.append(
-			'Set-Cookie', '__Host-analyticsId-chips=' + analyticsIdCHIPS + '; Max-Age=' + expire + '; HttpOnly; Secure; Path=/; SameSite=None; Partitioned;'
-		);*/
-		res.append(
-			'Set-Cookie', 'analyticsId-chips=' + analyticsIdCHIPS + ';Domain='+res.locals.domainC+'; Max-Age=' + expire + '; HttpOnly; Secure; Path=/; SameSite=None; Partitioned;'
-		);
+		res.cookie( 'analyticsId-chips', analyticsIdCHIPS, {
+			domain: `.${res.locals.domainC}`,
+			maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+			httpOnly: true,
+			sameSite: "none",
+			secure: true,
+			partitioned: true
+		} );
 	}
 
 	// Set the appropriate content type and send the analytics code
