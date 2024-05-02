@@ -2,11 +2,11 @@
 	function ( window ) {
 		// Track user interactions
 		function trackInteraction( interaction ) {
-			if ( 'buttonClickedCHIPS' === interaction ) {
-				var remoteURL = '<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/chips/trackCHIPS';
-			} else {
-				var remoteURL = '<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>/chips/track';
-			}
+			// Determine the remote URL based on the type of interaction
+			const baseURL = '<%= protocol %>://<%= domainC %><% if (isPortPresent) { %>:<%= port %><% } %>';
+			const remoteURL = interaction === 'buttonClickedCHIPS' ? `${baseURL}/chips/trackCHIPS` : `${baseURL}/chips/track`;
+
+			// Send the interaction data to the remote URL
 			fetch( remoteURL, {
 				method: 'POST',
 				credentials: 'include',
@@ -15,18 +15,27 @@
 				},
 				body: JSON.stringify( {interaction: interaction} )
 			} ).then( function ( response ) {
+				// Check if the response was successful
 				if ( !response.ok ) {
 					throw new Error( 'Network response was not ok' );
 				}
+				
+				// Return the response text
 				return response.text();
 			} ).then( function ( data ) {
-				var statusDiv = document.getElementById( 'status' );
+				// Get the status div
+				let statusDiv = document.getElementById( 'status' );
+
+				// If the status div exists, update its text and color
 				if ( statusDiv ) {
 					statusDiv.textContent = 'Interaction tracked!';
 					statusDiv.style.color = 'green';
 				}
 			} ).catch( function ( error ) {
-				var statusDiv = document.getElementById( 'status' );
+				// Get the status div
+				let statusDiv = document.getElementById( 'status' );
+
+				// If the status div exists, update its text and color
 				if ( statusDiv ) {
 					statusDiv.textContent = 'Interaction could not be tracked.';
 					statusDiv.style.color = 'red';
