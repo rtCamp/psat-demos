@@ -75,10 +75,10 @@ router.get( '/analytics.js', ( req, res ) => {
 router.post( '/track', ( req, res ) => {
 	const {interaction} = req.body;
 	const analyticsId = req.cookies.analyticsId;
-
+	
 	// If interaction and analyticsId are present, send a success status
-    // Otherwise, send a 400 status with an error message
-    interaction && analyticsId ? res.status(200).send(analyticsId) : res.status(400).send('Invalid request');
+	// Otherwise, send a 400 status with an error message
+	interaction && analyticsId ? res.status(200).send(analyticsId) : res.status(400).send('Invalid request');
 } );
 
 // Route to track user interactions for CHIPS
@@ -87,8 +87,8 @@ router.post( '/trackCHIPS', ( req, res ) => {
 	const analyticsIdCHIPS = req.cookies['analyticsId-chips'];
 
 	// If interaction and analyticsIdCHIPS are present, send a success status
-    // Otherwise, send a 400 status with an error message
-    interaction && analyticsIdCHIPS ? res.status(200).send(analyticsIdCHIPS) : res.status(400).send('Invalid request');
+	// Otherwise, send a 400 status with an error message
+	interaction && analyticsIdCHIPS ? res.status(200).send(analyticsIdCHIPS) : res.status(400).send('Invalid request');
 } );
 
 // Export the router
