@@ -9,90 +9,122 @@
     containerClass,
     hasStorageAccess;
 
+  // Fetch and apply the user's preferred theme from a remote URL
   async function fetchAndApplyTheme() {
     try {
+      // Send a GET request to the remote URL
       const response = await fetch(`${baseURL}/get-personalization`, {
         method: 'GET',
+        // Include the user's credentials in the request
         credentials: 'include',
     });
-
+      // Check if the response was successful
       if (!response.ok) {
         throw new Error('Network response was not ok');
+        // If the response was not successful, throw an error
         errorMessages.textContent = `Network response was not ok ${response.status} - ${response.statusText}`;
       }
 
+      // Parse the response body as JSON
       const data = await response.json();
+
+      // Update the page container's class name to include the user's preferred theme
       pageContainer.className = `${containerClass} ${data.theme}`;
-      if (data.theme === 'dark') {
-        themeSwitcher.checked = true;
-      }
+
+      // If the user's preferred theme is 'dark', check the dark mode switch
+      themeSwitcher.checked = data.theme === 'dark';
     } catch (error) {
+       // If an error occurred, update the error message element with the error message
       errorMessages.textContent = error?.message;
     }
   }
-
+  
+  // Function to update user preferences
   async function updateUserPreference() {
+    // Clear any previous error messages
     errorMessages.textContent = '';
+    
+    // If we already have storage access, fetch and apply the theme
     if (hasStorageAccess) {
       fetchAndApplyTheme();
       return;
     }
 
     try {
+      // Request storage access
       await document.requestStorageAccess();
+      // Check if we now have storage access
       hasStorageAccess = await document.hasStorageAccess();
 
+      // If we still don't have storage access, display an error message and return
       if (!hasStorageAccess) {
         errorMessages.textContent = 'User denied storage access';
         return;
       }
 
+      // If we have storage access, show the theme toggle and hide the load button
       toggleContainer.classList.remove('hidden');
       loadButton.classList.add('hidden');
 
+      // Fetch and apply the theme
       fetchAndApplyTheme();
     } catch (error) {
+      // If an error occurred, display the error message
       errorMessages.textContent = error?.message;
     }
   }
-
+  
+  // Function to set personalization settings
   async function fetchSetPersonalization() {
     try {
+      // Send a POST request to the set-personalization endpoint
       const response = await fetch(`${baseURL}/set-personalization`, {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
+        // Send the selected theme as the request body
         body: JSON.stringify({
           theme: themeSwitcher?.checked ? 'dark' : 'light',
         }),
       });
+      // Parse the response body as JSON
       const data = await response.json();
 
+      // Update the page container's class name to include the selected theme
       pageContainer.className = `${containerClass} ${data.theme}`;
     } catch (error) {
+      // If an error occurred, display the error message
       errorMessages.textContent = error?.message;
     }
   }
 
+  // Function to toggle the theme
   async function toggleTheme() {
+    // Clear any previous error messages
     errorMessages.textContent = '';
 
+    // If we have storage access, set the personalization settings
     if (hasStorageAccess) {
       fetchSetPersonalization();
       return;
     }
 
     try {
+      // Request storage access
       await document.requestStorageAccess();
+      // Check if we now have storage access
       hasStorageAccess = await document.hasStorageAccess();
 
+      // If we still don't have storage access, display an error message and return
       if (!hasStorageAccess) {
         errorMessages.textContent = 'User denied storage access';
         return;
       }
 
+      // Set the personalization settings
       fetchSetPersonalization();
     } catch (error) {
+      // If an error occurred, display the error message
       errorMessages.textContent = error?.message;
     }
   }
