@@ -75,7 +75,7 @@ const scenarios = [
 	'facebook-like',
 	'facebook-comments',
 	'disqus-comments',
-	'spotify',
+	'spotify'
 ];
 scenarios.forEach(scenario => {
 	const scenarioRoutes = require(`./src/scenarios/${scenario}/routes`);
