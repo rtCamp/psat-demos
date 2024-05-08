@@ -76,7 +76,6 @@ const scenarios = [
 	'facebook-comments',
 	'disqus-comments',
 	'spotify-embed',
-	'google-recaptcha',
 ];
 scenarios.forEach(scenario => {
 	const scenarioRoutes = require(`./src/scenarios/${scenario}/routes`);
