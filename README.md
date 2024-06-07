@@ -1,10 +1,10 @@
-# Privacy Sandbox Demos
+# PSAT Demos
 
-Privacy Sandbox Demos is a web application that showcases various demos and scenarios related to privacy sandbox.
+PSAT Demos is a web application that showcases various demos and scenarios related to privacy sandbox.
 
 ## Description
 
-Privacy Sandbox Demos is a web application built using Node.js and Express. It demonstrates different privacy-related
+PSAT Demos is a web application built using Node.js and Express. It demonstrates different privacy-related
 technologies and scenarios through various demos and use cases.
 
 The project is structured into two main sections:
@@ -16,7 +16,7 @@ The project is structured into two main sections:
 
 ### Prerequisites
 
-Before you can run the Privacy Sandbox Demos, make sure you have the following software installed:
+Before you can run the PSAT Demos, make sure you have the following software installed:
 
 - [Node.js](https://nodejs.org/)
 - [npm](https://www.npmjs.com/) (Node Package Manager)
@@ -55,7 +55,7 @@ _You can use `localhost` for the domains if you are running the application loca
 
 ## **Usage**
 
-To run the Privacy Sandbox Demos application, use the following command:
+To run the PSAT Demos application, use the following command:
 
 ```bash
 npm start
