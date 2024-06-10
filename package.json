@@ -1,7 +1,7 @@
 {
   "name": "privacy-sandbox-demos",
   "version": "1.0.0",
-  "description": "Privacy Sandbox Demos",
+  "description": "PSAT Demos",
   "main": "app.js",
   "scripts": {
     "start": "tailwindcss -i src/styles/input.css -o public/assets/styles/style.css && node app.js",
