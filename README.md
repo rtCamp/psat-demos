@@ -103,24 +103,24 @@ sequenceDiagram
     Note over User,DomainC: After blocking third-party cookies
     
     User->>DomainA: Visits
-    DomainA->>DomainC: Unable to assign unique ID
+    DomainA->>DomainC: Unable to assign a unique ID
     DomainC-->>User: Cannot store ID (no cookie)
     User->>DomainB: Visits
-    DomainB->>DomainC: Cannot retrieve unique ID
+    DomainB->>DomainC: Cannot retrieve the unique ID
     DomainC-->>User: Treats as a new User
 ```
 
 ### **E-Commerce - Cross-Domain Shopping Cart**
 
 This demo showcases the use of third-party cookies to store shopping cart information across domains while
-utilizing a third-party ecommerce service. The primary goal is to test whether third-party ecommerce services can
+utilizing a third-party e-commerce service. The primary goal is to test whether third-party e-commerce services can
 still use third-party cookies to manage cart information across different domains.
 
 **Domain Setup**
 
-* **domain-aaa.com** - First-party domain utilizing the third-party ecommerce service.
-* **domain-bbb.com** - Another first-party domain also utilizing the third-party ecommerce service.
-* **domain-ccc.com** - The third-party ecommerce service domain.
+* **domain-aaa.com** - First-party domain utilizing the third-party e-commerce service.
+* **domain-bbb.com** - Another first-party domain also utilizing the third-party e-commerce service.
+* **domain-ccc.com** - The third-party e-commerce service domain.
 
 **Sequence Diagram**
 
@@ -150,11 +150,11 @@ sequenceDiagram
 
     Note over User,DomainC: After blocking third-party cookies
 
-    User->>DomainA: Access homepage again
+    User->>DomainA: Access the homepage again
     DomainA->>User: Render homepage with embedded iframe to DomainC/products
     User->>DomainC: Clicks on "Add to cart" for Product 3
     DomainC-->>DomainC: Cannot set/update cart cookie
-    DomainC->>User: Fails to update cart icon count or displays incorrect count
+    DomainC->>User: Fails to update cart icon count or displays the incorrect count
     User->>DomainB: Navigates to domain-bbb.com again
     DomainB->>User: Render homepage with embedded iframe to DomainC/products
     User->>DomainC: Observes cart icon with no items
@@ -167,7 +167,7 @@ sequenceDiagram
 
 This demo is designed to showcase the behavior of third-party cookies within embedded content across different domains.
 We use an embedded YouTube video as an example of third-party content. The demonstration helps users and developers
-understand how third-party cookies function when interacting with content embedded from other domains.
+understand how third-party cookies function when interacting with content embedded in other domains.
 
 **Domains Used:**
 
@@ -218,13 +218,12 @@ sequenceDiagram
 
 ### **Single Sign-On - Cross-Domain Single Sign-On**
 
-This demo showcases a basic implementation of a Single Sign-On (SSO) scenario where third-party cookies are used to
-share login information across different domains.
+This demo showcases a basic implementation of a Single Sign-On (SSO) scenario where third-party cookies are used to share login information across different domains.
 
 **Domains Used:**
 
-* **domain-aaa.com** - The first party domain using the third party service.
-* **domain-bbb.com** - Another first party domain using the third party service.
+* **domain-aaa.com** - The first-party domain using the third-party service.
+* **domain-bbb.com** - Another first-party domain using the third-party service.
 * **domain-ccc.com** - The third-party single sign-on service.
 
 **Sequence Diagram**
