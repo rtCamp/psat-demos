@@ -1,15 +1,14 @@
 # PSAT Demos
 
-PSAT Demos is a web application that showcases various demos and scenarios related to privacy sandbox.
+PSAT Demos is a web application that showcases various demos and scenarios related to Privacy Sandbox.
 
 ## Description
 
-PSAT Demos is a web application built using Node.js and Express. It demonstrates different privacy-related
-technologies and scenarios through various demos and use cases.
+PSAT Demos is a web application built using Node.js and Express. It demonstrates different privacy-related technologies and scenarios through various demos and use cases.
 
 The project is structured into two main sections:
 
-1. **Demo Types**: These are categorized demos, each showcasing a specific privacy sandbox technology.
+1. **Demo Types**: These are categorized demos showcasing a specific privacy sandbox technology.
 2. **Scenarios**: These demos represent real-world scenarios where privacy technologies can be applied.
 
 ## Getting Started
@@ -75,9 +74,7 @@ cookies as partitioned cookies tied to the top-level site where it's initially s
 
 ### **Analytics - Cross-Domain Tracking**
 
-This demo showcases the ability to track user interactions using third-party cookies when third-party services are
-utilized. The demo consists of three domains - a first-party domain utilizing a third-party service, another first-party
-domain also utilizing the third-party service, and the third-party analytics service domain.
+This demo showcases the ability to track user interactions using third-party cookies when third-party services are utilized. The demo consists of three domains - a first-party domain utilizing a third-party service, another first-party domain also utilizing the third-party service, and the third-party analytics service domain.
 
 **Domain Information**
 
@@ -103,7 +100,7 @@ sequenceDiagram
     DomainB->>DomainC: Retrieves unique ID from cookie
     DomainC->>User: Recognizes as the same User
 
-    Note over User,DomainC: After Third-party Cookie Deprecation
+    Note over User,DomainC: After blocking third-party cookies
     
     User->>DomainA: Visits
     DomainA->>DomainC: Unable to assign unique ID
@@ -151,7 +148,7 @@ sequenceDiagram
     DomainC->>DomainC: Fetches cart data from cookie
     DomainC->>User: Displays cart contents (Product 1 and Product 2)
 
-    Note over User,DomainC: After third-party cookie deprecation
+    Note over User,DomainC: After blocking third-party cookies
 
     User->>DomainA: Access homepage again
     DomainA->>User: Render homepage with embedded iframe to DomainC/products
@@ -202,7 +199,7 @@ sequenceDiagram
 
     User->>YouTube: Observe "watch later" button presence
 
-    Note over User,YouTube: After third-party cookie deprecation
+    Note over User,YouTube: After blocking third-party cookies
 
     User->>DomainA: Navigate to DomainA/embedded-video
     DomainA->>YouTube: Load YouTube video
@@ -254,7 +251,7 @@ sequenceDiagram
     DomainC->>DomainB: Confirm user is logged in
     DomainB->>User: Render profile page
 
-    Note over User,DomainC: After Third-Party Cookies Deprecation
+    Note over User,DomainC: After blocking third-Party cookies
 
     User->>DomainA: Visit domain-aaa.com
     DomainA->>User: Render sign-in page
