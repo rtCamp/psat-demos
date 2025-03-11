@@ -92,7 +92,7 @@ scenarios.forEach(scenario => {
 // Catch-all route handler for unmatched routes, rendering the default page
 app.use((req, res) => {
 	res.render(path.join(__dirname, 'src/common/index'), {
-		title: 'PSAT Demos'
+		title: 'Privacy Sandbox Demos'
 	});
 });
 
