@@ -8,13 +8,11 @@ name: Deploy
 jobs:
   deploy:
     name: Deploy
-    # runs-on: self-hosted
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Deploy
-        id: deploy
-        uses: rtCamp/action-deploy-frappe@main
-        #uses: docker://ghcr.io/rtcamp/action-deploy-frappe:dev
+      - uses: actions/checkout@v4
+      - uses: rtCamp/action-deploy-wordpress@master
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          NODE_VERSION: 18
+          NODE_BUILD_COMMAND: npm ci
