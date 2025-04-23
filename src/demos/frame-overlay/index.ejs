@@ -1,0 +1,157 @@
+<%- include(commonPath + '/header.ejs') %>
+    <%- include(commonPath + '/internal-page/header.ejs') %>
+        <style>
+            .frame-overlay-header {
+                background-color: #333;
+                color: #fff;
+                text-align: center;
+                padding: 20px;
+            }
+
+            main {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                padding: 20px;
+            }
+
+            .banner {
+                text-align: center;
+                padding: 20px;
+            }
+
+            .banner h1 {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+
+            .banner p {
+                font-size: 14px;
+                line-height: 1;
+                font-style: italic;
+            }
+
+            .iframe-container {
+                width: 48%;
+                margin-bottom: 20px;
+            }
+
+            iframe {
+                width: 100%;
+                height: 300px;
+                border: 1px solid #ccc;
+            }
+
+            .invisible-iframe {
+                display: none;
+            }
+        </style>
+        <div class="frame-overlay-header">
+            <p>Where every view is neatly framed to perfection!</p>
+        </div>
+        <div class="banner">
+            <p>In the digital realm, they reside,</p>
+            <p>Iframes, portals, on screens they glide.</p>
+            <p>They embed videos, maps, and more,</p>
+            <p>In web pages, they gracefully soar.</p>
+            <p>Yet sometimes hidden, in the depths they dwell,</p>
+            <p>Invisible iframes, a secret to tell.</p>
+        </div>
+        <main>
+            <div class="iframe-container">
+                <h2>Visible Iframe</h2>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/7AQFDm7STmw?si=HtLgVxcF2TicPyNC"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+            </div>
+            <div class="iframe-container">
+                <h2>Visible Iframe 1</h2>
+                <iframe src="https://www.example.com" frameborder="0"></iframe>
+            </div>
+            <div class="iframe-container">
+                <h2>Visible Iframe 2</h2>
+                <iframe src="https://jobs.jobvite.com/worldfirst/?nl=1&fr=false" frameborder="0"></iframe>
+            </div>
+            <div class="iframe-container">
+                <h2>Visible Iframe 3</h2>
+                <iframe src="https://www.example3.com" frameborder="0"></iframe>
+            </div>
+            <div class="iframe-container">
+                <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Sunsets don&#39;t get much better than this one over <a
+                                href="https://twitter.com/GrandTetonNPS?ref_src=twsrc%5Etfw">@GrandTetonNPS</a>. <a
+                                href="https://twitter.com/hashtag/nature?src=hash&amp;ref_src=twsrc%5Etfw">#nature</a> <a
+                                href="https://twitter.com/hashtag/sunset?src=hash&amp;ref_src=twsrc%5Etfw">#sunset</a> <a
+                                href="http://t.co/YuKy2rcjyU">pic.twitter.com/YuKy2rcjyU</a></p>&mdash; US Department of the
+                    Interior (@Interior) <a href="https://twitter.com/Interior/status/463440424141459456?ref_src=twsrc%5Etfw">May
+                        5, 2014</a></blockquote>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+            <div class="iframe-container">
+                <h2>Visible Iframe 5 (Map)</h2>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d242118.17048063042!2d73.69781163527144!3d18.52454474283713!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf2e67461101%3A0x828d43bf9d9ee343!2sPune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1694351585748!5m2!1sen!2sin"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="invisible-iframe">
+                <iframe src="https://www.invisible1.com" frameborder="0"></iframe>
+            </div>
+            <div class="iframe-container">
+                <h2>Visible Iframe 5 (Map)</h2>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d242118.17048063042!2d73.69781163527144!3d18.52454474283713!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf2e67461101%3A0x828d43bf9d9ee343!2sPune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1694351585748!5m2!1sen!2sin"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="iframe-container">
+                <h2>Visible Iframe 5 (Map)</h2>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d242118.17048063042!2d73.69781163527144!3d18.52454474283713!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf2e67461101%3A0x828d43bf9d9ee343!2sPune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1694351585748!5m2!1sen!2sin"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="invisible-iframe">
+                <iframe src="https://www.invisible2.com" frameborder="0"></iframe>
+            </div>
+            <div>
+                <h2>Iframe RWS</h2>
+                <iframe src="https://www.livemint.com/sports/news/asian-games-2023-sit-in-protest-multiple-reviews-and-high-voltage-drama-what-preceded-indias-gold-win-in-kabaddi-11696686653764.html"
+                        width="200" height="200"></iframe>
+            </div>
+
+            <div>
+                <iframe srcdoc="
+                        <!DOCTYPE html>
+                        <html lang='en'>
+                        <head>
+                            <meta charset='UTF-8'>
+                            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                            <title>HTML Inside Iframe</title>
+                        </head>
+                        <body>
+                            <h2>iFrame without src - Example 1</h2>
+                            <div>
+                                <img src='https://placehold.jp/150x150.png' width='150' height='150' />
+                            </div>
+                        </body>
+                        </html>
+            "></iframe>
+
+            <iframe srcdoc="
+                        <!DOCTYPE html>
+                        <html lang='en'>
+                        <head>
+                            <meta charset='UTF-8'>
+                            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                            <title>HTML Inside Iframe</title>
+                        </head>
+                        <body>
+                            <h2>iFrame without src - Example 2</h2>
+                            <div>
+                                <img src='https://placehold.jp/150x150.png' width='150' height='150' />
+                            </div>
+                        </body>
+                        </html>
+            "></iframe>
+            </div>
+        </main>
+    <%- include(commonPath + '/internal-page/footer.ejs') %>
+<%- include(commonPath + '/footer.ejs') %>

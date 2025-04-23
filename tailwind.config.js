@@ -6,6 +6,9 @@ module.exports = {
       'sans' : ['Open Sans', 'sans-serif'],
     },
     extend: {},
+    container: {
+      center: true,
+    },
   },
   plugins: [{
     tailwindcss: {},

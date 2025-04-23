@@ -1,7 +1,7 @@
 {
   "name": "privacy-sandbox-demos",
   "version": "1.0.0",
-  "description": "Privacy Sandbox Demos",
+  "description": "PSAT Demos",
   "main": "app.js",
   "scripts": {
     "start": "tailwindcss -i src/styles/input.css -o public/assets/styles/style.css && node app.js",
@@ -14,7 +14,7 @@
     "crypto": "^1.0.1",
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
-    "express": "^4.18.2",
+    "express": "^4.19.2",
     "path": "^0.12.7",
     "uuid": "^9.0.0"
   },

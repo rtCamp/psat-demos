@@ -5,21 +5,18 @@ const uuid = require( 'uuid' );
 
 router.get('/', (req, res) => {
 	// Send the default page
-	res.render(path.join(__dirname,'index'), {
+	res.render(path.join(__dirname,'analytics-third-party'), {
 		title: 'CHIPS'
 	});
 });
-router.get('/analytics-first-party', (req, res) => {
-	res.render(path.join(__dirname,'analytics-first-party'), {
-		title: 'First Party Cookie Experiments'
-	});
-});
+
 router.get('/analytics-third-party', (req, res) => {
 	// Send the default page
 	res.render(path.join(__dirname,'analytics-third-party'), {
-		title: 'Third Party Cookie Experiments'
+		title: 'CHIPS'
 	});
 });
+
 // Serve the analytics.js file to the site
 router.get( '/analytics.js', ( req, res ) => {
 	let analyticsId = req.cookies.analyticsId;
@@ -39,17 +36,18 @@ router.get( '/analytics.js', ( req, res ) => {
 
 	}
 
-	let analyticsIdCHIPS = req.cookies['__Host-analyticsId-chips'];
+	let analyticsIdCHIPS = req.cookies['analyticsId-chips'];
 
 	if ( !analyticsIdCHIPS ) {
 		analyticsIdCHIPS = uuid.v4();
-		let expire = 30 * 24 * 60 * 60 * 1000;
-		res.append(
-			'Set-Cookie', '__Host-analyticsId-chips=' + analyticsIdCHIPS + '; Max-Age=' + expire + '; HttpOnly; Secure; Path=/; SameSite=None; Partitioned;'
-		);
-		res.append(
-			'Set-Cookie', 'analyticsId-chips-test=' + analyticsIdCHIPS + ';Domain='+res.locals.domainC+'; Max-Age=' + expire + '; HttpOnly; Secure; Path=/; SameSite=None; Partitioned;'
-		);
+		res.cookie( 'analyticsId-chips', analyticsIdCHIPS, {
+			domain: `.${res.locals.domainC}`,
+			maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+			httpOnly: true,
+			sameSite: "none",
+			secure: true,
+			partitioned: true
+		} );
 	}
 
 	// Set the appropriate content type and send the analytics code
@@ -65,7 +63,6 @@ router.post( '/track', ( req, res ) => {
 
 		// Send success status for successful interaction tracking
 		res.status( 200 ).send( analyticsId );
-		//res.sendStatus( 200 );
 	} else {
 		res.status( 400 ).send( 'Invalid request' );
 	}
@@ -73,7 +70,7 @@ router.post( '/track', ( req, res ) => {
 
 router.post( '/trackCHIPS', ( req, res ) => {
 	const {interaction} = req.body;
-	const analyticsIdCHIPS = req.cookies['__Host-analyticsId-chips'];
+	const analyticsIdCHIPS = req.cookies['analyticsId-chips'];
 
 	if ( interaction && analyticsIdCHIPS ) {
 
