@@ -13,6 +13,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: rtCamp/action-deploy-wordpress@master
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.ED_DEPLOYMENT_KEY }}
           NODE_VERSION: 18
           NODE_BUILD_COMMAND: npm ci
