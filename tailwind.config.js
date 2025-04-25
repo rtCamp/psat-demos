@@ -5,6 +5,13 @@ module.exports = {
     fontFamily: {
       'sans' : ['Open Sans', 'sans-serif'],
     },
+    screens: {
+      sm: '960px',
+      md: '1280px',
+      lg: '1280px',
+      xl: '1280px',
+      '2xl': '1280px',
+    },
     extend: {},
     container: {
       center: true,
