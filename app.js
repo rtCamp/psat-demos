@@ -63,6 +63,7 @@ const demoTypes = [
 	'fedcm',
 	'storage-access-api',
 	'frame-overlay',
+  'prt-script-blocking',
 ];
 demoTypes.forEach(demoType => {
 	const demoRoutes = require(`./src/demos/${demoType}/routes`);
